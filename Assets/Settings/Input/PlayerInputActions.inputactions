@@ -7,8 +7,17 @@
             "actions": [
                 {
                     "name": "Move Axis",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "1433def4-9484-4f94-bf35-fb606e8be449",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Mouse Look",
+                    "type": "PassThrough",
+                    "id": "a9b8c4f2-93f2-44bd-9678-8d2ccb204d3a",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -70,6 +79,17 @@
                     "action": "Move Axis",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bdbf0fea-84e5-41c8-b16b-9792b14e2c02",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

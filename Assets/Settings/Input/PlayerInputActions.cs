@@ -29,8 +29,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move Axis"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""1433def4-9484-4f94-bf35-fb606e8be449"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Mouse Look"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a9b8c4f2-93f2-44bd-9678-8d2ccb204d3a"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -92,6 +101,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Move Axis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdbf0fea-84e5-41c8-b16b-9792b14e2c02"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +121,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_MoveAxis = m_Keyboard.FindAction("Move Axis", throwIfNotFound: true);
+        m_Keyboard_MouseLook = m_Keyboard.FindAction("Mouse Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +184,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Keyboard;
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_MoveAxis;
+    private readonly InputAction m_Keyboard_MouseLook;
     public struct KeyboardActions
     {
         private @PlayerInputActions m_Wrapper;
         public KeyboardActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveAxis => m_Wrapper.m_Keyboard_MoveAxis;
+        public InputAction @MouseLook => m_Wrapper.m_Keyboard_MouseLook;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +203,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveAxis.started += instance.OnMoveAxis;
             @MoveAxis.performed += instance.OnMoveAxis;
             @MoveAxis.canceled += instance.OnMoveAxis;
+            @MouseLook.started += instance.OnMouseLook;
+            @MouseLook.performed += instance.OnMouseLook;
+            @MouseLook.canceled += instance.OnMouseLook;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -187,6 +213,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveAxis.started -= instance.OnMoveAxis;
             @MoveAxis.performed -= instance.OnMoveAxis;
             @MoveAxis.canceled -= instance.OnMoveAxis;
+            @MouseLook.started -= instance.OnMouseLook;
+            @MouseLook.performed -= instance.OnMouseLook;
+            @MouseLook.canceled -= instance.OnMouseLook;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -207,5 +236,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IKeyboardActions
     {
         void OnMoveAxis(InputAction.CallbackContext context);
+        void OnMouseLook(InputAction.CallbackContext context);
     }
 }
