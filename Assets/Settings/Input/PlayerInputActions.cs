@@ -35,6 +35,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""a9b8c4f2-93f2-44bd-9678-8d2ccb204d3a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom "",
+                    ""type"": ""Value"",
+                    ""id"": ""3f18e378-5b26-461a-a01b-41b0cbbbbd13"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Move Axis"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3bb94da-e38f-40a1-8b03-561bd6192fc8"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdbf0fea-84e5-41c8-b16b-9792b14e2c02"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66bd3632-8b69-4bac-804d-1a2468d0a28a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c732ab45-f84d-470e-92bc-55a5a2a5e8fb"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Clamp(min=-0.1,max=0.1)"",
+                    ""groups"": """",
+                    ""action"": ""Zoom "",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +163,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_MoveAxis = m_Keyboard.FindAction("Move Axis", throwIfNotFound: true);
+        m_Keyboard_Look = m_Keyboard.FindAction("Look", throwIfNotFound: true);
+        m_Keyboard_Zoom = m_Keyboard.FindAction("Zoom ", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +227,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Keyboard;
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_MoveAxis;
+    private readonly InputAction m_Keyboard_Look;
+    private readonly InputAction m_Keyboard_Zoom;
     public struct KeyboardActions
     {
         private @PlayerInputActions m_Wrapper;
         public KeyboardActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveAxis => m_Wrapper.m_Keyboard_MoveAxis;
+        public InputAction @Look => m_Wrapper.m_Keyboard_Look;
+        public InputAction @Zoom => m_Wrapper.m_Keyboard_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +248,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveAxis.started += instance.OnMoveAxis;
             @MoveAxis.performed += instance.OnMoveAxis;
             @MoveAxis.canceled += instance.OnMoveAxis;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -187,6 +261,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveAxis.started -= instance.OnMoveAxis;
             @MoveAxis.performed -= instance.OnMoveAxis;
             @MoveAxis.canceled -= instance.OnMoveAxis;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -207,5 +287,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IKeyboardActions
     {
         void OnMoveAxis(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }
