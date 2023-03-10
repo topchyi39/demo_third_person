@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Player
+namespace Player.Components.MovementComponents.Data
 {
     [Serializable]
     public class MovementLayerData

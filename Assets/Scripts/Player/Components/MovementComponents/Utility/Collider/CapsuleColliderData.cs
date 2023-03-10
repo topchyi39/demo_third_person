@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Player.Utility.Collider
+namespace Player.Components.MovementComponents.Utility.Collider
 {
     public class CapsuleColliderData
     {
@@ -10,7 +10,10 @@ namespace Player.Utility.Collider
 
         public void Initialize(GameObject gameObject)
         {
-            if (Collider != null) return;
+            if (Collider != null)
+            {
+                return;
+            }
 
             Collider = gameObject.GetComponent<CapsuleCollider>();
 

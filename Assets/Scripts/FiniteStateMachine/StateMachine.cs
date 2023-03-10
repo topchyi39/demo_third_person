@@ -20,7 +20,7 @@ namespace FiniteStateMachine
             if (state == null) return;
             
             _currentState?.Exit();
-
+            Debug.Log($"Change to {state.GetType().Name}");
             _currentState = state;
             _currentState.Enter();
         }

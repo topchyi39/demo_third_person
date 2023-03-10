@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Move Axis",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "1433def4-9484-4f94-bf35-fb606e8be449",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -19,6 +19,15 @@
                     "type": "PassThrough",
                     "id": "a9b8c4f2-93f2-44bd-9678-8d2ccb204d3a",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Zoom ",
+                    "type": "Value",
+                    "id": "3f18e378-5b26-461a-a01b-41b0cbbbbd13",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -88,6 +97,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Mouse Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c732ab45-f84d-470e-92bc-55a5a2a5e8fb",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "Clamp(min=-0.1,max=0.1)",
+                    "groups": "",
+                    "action": "Zoom ",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

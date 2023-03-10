@@ -1,22 +1,18 @@
 ﻿using UnityEngine;
 
-namespace Player.Utility.Collider
+namespace Player.Components.MovementComponents.Utility.Collider
 {
     public class ResizableCapsuleCollider : MonoBehaviour
     {
         [SerializeField] private DefaultColliderData defaultColliderData;
         [SerializeField] private SlopeData slopeData;
-        [SerializeField] private PlayerTriggerColliderData triggerColliderData;
         
-
-        public CapsuleColliderData CapsuleColliderData { get; private set; }
-
         public DefaultColliderData DefaultColliderData => defaultColliderData;
         public SlopeData SlopeData => slopeData;
-        public PlayerTriggerColliderData PlayerTriggerColliderData => triggerColliderData;
-
-        public Vector3 WorldCenter => CapsuleColliderData.Collider.bounds.center;
-        public Vector3 LocalCenter => CapsuleColliderData.ColliderCenterInLocalSpace;
+        public CapsuleColliderData CapsuleColliderData { get; private set; }
+        
+        public Vector3 WorldCapsuleCentre => CapsuleColliderData.Collider.bounds.center;
+        public Vector3 LocalCapsuleCentre => CapsuleColliderData.ColliderCenterInLocalSpace;
         private void Awake()
         {
             Resize();
@@ -36,12 +32,15 @@ namespace Player.Utility.Collider
 
         public void Initialize(GameObject gameObject)
         {
-            if (CapsuleColliderData != null) return;
+            if (CapsuleColliderData != null)
+            {
+                return;
+            }
 
             CapsuleColliderData = new CapsuleColliderData();
 
             CapsuleColliderData.Initialize(gameObject);
-            triggerColliderData.Initialize();
+
             OnInitialize();
         }
 
@@ -51,9 +50,11 @@ namespace Player.Utility.Collider
 
         public void CalculateCapsuleColliderDimensions()
         {
-            SetCapsuleColliderRadius(defaultColliderData.Radius);
+            if(DefaultColliderData == null) return;
+            
+            SetCapsuleColliderRadius(DefaultColliderData.Radius);
 
-            SetCapsuleColliderHeight(defaultColliderData.Height * (1f - slopeData.StepHeightPercentage));
+            SetCapsuleColliderHeight(DefaultColliderData.Height * (1f - SlopeData.StepHeightPercentage));
 
             RecalculateCapsuleColliderCenter();
 
@@ -74,20 +75,24 @@ namespace Player.Utility.Collider
 
         public void RecalculateCapsuleColliderCenter()
         {
-            var colliderHeightDifference = defaultColliderData.Height - CapsuleColliderData.Collider.height;
+            float colliderHeightDifference = DefaultColliderData.Height - CapsuleColliderData.Collider.height;
 
-            var newColliderCenter = new Vector3(0f, defaultColliderData.CenterY + colliderHeightDifference / 2f, 0f);
+            Vector3 newColliderCenter = new Vector3(0f, DefaultColliderData.CenterY + (colliderHeightDifference / 2f), 0f);
 
             CapsuleColliderData.Collider.center = newColliderCenter;
         }
 
         public void RecalculateColliderRadius()
         {
-            var halfColliderHeight = CapsuleColliderData.Collider.height / 2f;
+            float halfColliderHeight = CapsuleColliderData.Collider.height / 2f;
 
-            if (halfColliderHeight >= CapsuleColliderData.Collider.radius) return;
+            if (halfColliderHeight >= CapsuleColliderData.Collider.radius)
+            {
+                return;
+            }
 
             SetCapsuleColliderRadius(halfColliderHeight);
         }
+        
     }
 }

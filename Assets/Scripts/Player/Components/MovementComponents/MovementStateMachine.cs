@@ -10,12 +10,21 @@ namespace Player.Components.MovementComponents
 
         private BaseMoveState _defaultState;
         
+        public IdleState IdleState { get; private set; }
+        public WalkState WalkState { get; private set; }
+        
         public MovementStateMachine(MovementComponent component)
         {
             _component = component;
+            InitializeStates();
+            ChangeState(IdleState);
+        }
+
+        private void InitializeStates()
+        {
             _defaultState = new GroundState(_component);
-            
-            ChangeState(_defaultState);
+            IdleState = new IdleState(_component);
+            WalkState = new WalkState(_component);
         }
     }
 }

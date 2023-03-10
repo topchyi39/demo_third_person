@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Player.Components;
 using UnityEngine;
@@ -9,16 +10,26 @@ namespace Player
     [RequireComponent(typeof(Input))]
     public class CharacterController : MonoBehaviour
     {
-        [SerializeField] private Input input; 
+        [SerializeField] private CharacterAnimator characterAnimator;
+        [SerializeField] private Input input;
         
         private IEnumerable<CharacterComponent> _components;
         private CharacterComponent[] _componentsArray;
 
+        public CharacterAnimator CharacterAnimator => characterAnimator;
         public Input Input => input;
-        
+
         private void Awake()
         {
             FindCharacterComponents();
+        }
+
+        private void Start()
+        {
+            foreach (var characterComponent in _components)
+            {
+                characterComponent.Setup(this);
+            }
         }
 
         /// <summary>
@@ -31,10 +42,7 @@ namespace Player
             _components = components.OrderBy(component => component.Priority);
             _componentsArray = _components.ToArray();
 
-            foreach (var characterComponent in _components)
-            {
-                characterComponent.Setup(this);
-            }
+            
         }
 
         /// <summary>

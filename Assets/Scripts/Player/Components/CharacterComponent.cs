@@ -11,8 +11,9 @@ namespace Player.Components
         protected Input _input;
         
         public int Priority => priority;
-        public bool BlockOther => _blockOther;
-
+        public Input Input => _input;
+        public CharacterAnimator Animator => _characterController.CharacterAnimator;
+        
         public void Setup(CharacterController characterController)
         {
             _characterController = characterController;

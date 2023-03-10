@@ -40,8 +40,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244359743}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -54,6 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110323065}
+  - component: {fileID: 2110323066}
   m_Layer: 7
   m_Name: FollowTarget
   m_TagString: Untagged
@@ -76,6 +77,18 @@ Transform:
   m_Father: {fileID: 1245920120543976220}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110323066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110323064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bdee573a2343fb8797fb7a7fb0b68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2684550547096404056
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,12 +101,13 @@ GameObject:
   - component: {fileID: 6098204765834136952}
   - component: {fileID: 6043181337002525795}
   - component: {fileID: 7378426299921271162}
+  - component: {fileID: 8842113578545425961}
   - component: {fileID: 165537681443808883}
   - component: {fileID: 2788586682284617637}
   - component: {fileID: 8936838089646252777}
   - component: {fileID: 7349867136018694236}
   - component: {fileID: 6442618070780282943}
-  - component: {fileID: 2806587770590003351}
+  - component: {fileID: 2611663226417148705}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -174,7 +188,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e7ae87eda24590b6d967281e9bef75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAnimator: {fileID: 8842113578545425961}
   input: {fileID: 6043181337002525795}
+--- !u!114 &8842113578545425961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2684550547096404056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eea4c4d72a24cc5a6443f791fe4c673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &165537681443808883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,9 +216,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   followTarget: {fileID: 2110323065}
-  sensitivity: 5
+  virtualCamera: {fileID: 0}
+  moveSensitivity: 5
   minXAngle: 40
   maxXAngle: 340
+  zoomSensitivity: 2
+  smoothing: 5
+  minDistance: 1
+  maxDistance: 3
+  minShoulderOffset: 0.1
+  maxShoulderOffset: 0.5
 --- !u!114 &2788586682284617637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,10 +252,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 2
+  movementData: {fileID: 11400000, guid: 5d51d386c372f064bb15bd86c0e6c1c3, type: 2}
   layerData:
     groundLayer:
       serializedVersion: 2
       m_Bits: 64
+  animationData:
+    verticalAxisParameter: VerticalAxis
+    horizontalAxisParameter: HorizontalAxis
+    idleParameter: Idle
+    walkParameter: Walk
+  followTarget: {fileID: 2110323065}
+  cameraTransform: {fileID: 0}
 --- !u!54 &7349867136018694236
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -252,7 +294,7 @@ CapsuleCollider:
   m_Height: 1.3499999
   m_Direction: 1
   m_Center: {x: 0, y: 1.125, z: 0}
---- !u!114 &2806587770590003351
+--- !u!114 &2611663226417148705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,7 +303,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2684550547096404056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2292de66a8db456288c6a923d1dde21c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e68b288843b4fef840638267f8ee21c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultColliderData:
@@ -272,8 +314,6 @@ MonoBehaviour:
     stepHeightPercentage: 0.25
     floatRayDistance: 2
     stepReachForce: 25
-  triggerColliderData:
-    groundCheckCollider: {fileID: 1244359745}
 --- !u!1001 &6098204765300193653
 PrefabInstance:
   m_ObjectHideFlags: 0
