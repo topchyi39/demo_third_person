@@ -4,6 +4,8 @@ namespace Player
 {
     public class CharacterAnimator : MonoBehaviour
     {
+        [SerializeField] private float dampedTime = 0.25f;
+        
         private Animator _animator;
 
         private void Awake()
@@ -21,9 +23,10 @@ namespace Player
             _animator.SetFloat(key, value);
         }
         
-        public void SetFloatSmooth(int key, float value)
+        public void SetFloatSmooth(int key, float value, float? dampTime = null)
         {
-            _animator.SetFloat(key, value, 0.01f, Time.deltaTime);
+            dampTime ??= dampedTime;
+            _animator.SetFloat(key, value, dampTime.Value, Time.deltaTime);
         }
     }
 }

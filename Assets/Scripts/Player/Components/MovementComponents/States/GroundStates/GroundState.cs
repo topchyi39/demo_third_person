@@ -9,12 +9,27 @@ namespace Player.Components.MovementComponents.States.GroundStates
             
         }
 
+        public override void Enter()
+        {
+            base.Enter();
+            
+            _component.Animator.SetFloat(_animationData.VerticalKey, _reusableData.MoveAxis.y);
+            _component.Animator.SetFloat(_animationData.HorizontalKey, _reusableData.MoveAxis.x);
+        }
+
         public override void Update()
         {
             base.Update();
             
             _component.Animator.SetFloatSmooth(_animationData.VerticalKey, _reusableData.MoveAxis.y);
             _component.Animator.SetFloatSmooth(_animationData.HorizontalKey, _reusableData.MoveAxis.x);
+            
+            if(_currentMovementStateData != null)
+            {
+                var direction = Mathf.Clamp(_reusableData.LookDelta.x, -1f, 1f);
+                _component.Animator.SetFloatSmooth(Animator.StringToHash("Direction"), direction,
+                    _currentMovementStateData.TimeToReachRotation.y);
+            }
         }
 
         public override void FixedUpdate()

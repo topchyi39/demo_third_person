@@ -37,8 +37,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Mouse Look"",
-                    ""type"": ""PassThrough"",
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
                     ""id"": ""a9b8c4f2-93f2-44bd-9678-8d2ccb204d3a"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -113,12 +113,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a3bb94da-e38f-40a1-8b03-561bd6192fc8"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move Axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""bdbf0fea-84e5-41c8-b16b-9792b14e2c02"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Mouse Look"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66bd3632-8b69-4bac-804d-1a2468d0a28a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -141,7 +163,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_MoveAxis = m_Keyboard.FindAction("Move Axis", throwIfNotFound: true);
-        m_Keyboard_MouseLook = m_Keyboard.FindAction("Mouse Look", throwIfNotFound: true);
+        m_Keyboard_Look = m_Keyboard.FindAction("Look", throwIfNotFound: true);
         m_Keyboard_Zoom = m_Keyboard.FindAction("Zoom ", throwIfNotFound: true);
     }
 
@@ -205,14 +227,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Keyboard;
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_MoveAxis;
-    private readonly InputAction m_Keyboard_MouseLook;
+    private readonly InputAction m_Keyboard_Look;
     private readonly InputAction m_Keyboard_Zoom;
     public struct KeyboardActions
     {
         private @PlayerInputActions m_Wrapper;
         public KeyboardActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveAxis => m_Wrapper.m_Keyboard_MoveAxis;
-        public InputAction @MouseLook => m_Wrapper.m_Keyboard_MouseLook;
+        public InputAction @Look => m_Wrapper.m_Keyboard_Look;
         public InputAction @Zoom => m_Wrapper.m_Keyboard_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
@@ -226,9 +248,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveAxis.started += instance.OnMoveAxis;
             @MoveAxis.performed += instance.OnMoveAxis;
             @MoveAxis.canceled += instance.OnMoveAxis;
-            @MouseLook.started += instance.OnMouseLook;
-            @MouseLook.performed += instance.OnMouseLook;
-            @MouseLook.canceled += instance.OnMouseLook;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
@@ -239,9 +261,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @MoveAxis.started -= instance.OnMoveAxis;
             @MoveAxis.performed -= instance.OnMoveAxis;
             @MoveAxis.canceled -= instance.OnMoveAxis;
-            @MouseLook.started -= instance.OnMouseLook;
-            @MouseLook.performed -= instance.OnMouseLook;
-            @MouseLook.canceled -= instance.OnMouseLook;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
@@ -265,7 +287,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IKeyboardActions
     {
         void OnMoveAxis(InputAction.CallbackContext context);
-        void OnMouseLook(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
     }
 }

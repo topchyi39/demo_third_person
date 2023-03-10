@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2157.8057, g: 2261.6191, b: 3283.9805, a: 1}
+  m_IndirectSpecularColor: {r: 2159.8809, g: 2263.3887, b: 3285.3398, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -802,7 +802,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31478
+  m_Name: pb_Mesh334788
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2173,6 +2173,16 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1853962426}
+    - target: {fileID: 6098204765932204034, guid: c2134670f54fc6549b9ba3c20f57b11d,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842113578545425961, guid: c2134670f54fc6549b9ba3c20f57b11d,
+        type: 3}
+      propertyPath: dampedTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8936838089646252777, guid: c2134670f54fc6549b9ba3c20f57b11d,
         type: 3}
       propertyPath: cameraTransform

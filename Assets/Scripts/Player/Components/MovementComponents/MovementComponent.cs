@@ -45,6 +45,7 @@ namespace Player.Components.MovementComponents
         public override void ExecuteUpdate()
         {
             _reusableData.MoveAxis = _input.MoveAxis.ReadValue<Vector2>();
+            _reusableData.LookDelta = _input.Look.ReadValue<Vector2>();
             _stateMachine.Update();
         }
         

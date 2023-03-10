@@ -5,6 +5,7 @@ namespace Player.Components.MovementComponents.States.Data
     public class ReusableData
     {
         public Vector2 MoveAxis { get; set; }
+        public Vector2 LookDelta { get; set; }
         
         //Move Data
         public float SpeedModifier { get; set; }

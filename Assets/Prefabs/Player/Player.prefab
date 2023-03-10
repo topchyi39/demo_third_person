@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eea4c4d72a24cc5a6443f791fe4c673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dampedTime: 0.25
 --- !u!114 &165537681443808883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,10 +223,10 @@ MonoBehaviour:
   maxXAngle: 340
   zoomSensitivity: 2
   smoothing: 5
+  defaultDistance: 2
   minDistance: 1
   maxDistance: 3
-  minShoulderOffset: 0.1
-  maxShoulderOffset: 0.5
+  directionParameter: Direction
 --- !u!114 &2788586682284617637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,7 +744,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6368166002592760868}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 4483c27c97e092544a9a9e88f1d2329f, type: 3}
   m_Controller: {fileID: 9100000, guid: 93cd824221cad6744b82c15f8bea0a25, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0

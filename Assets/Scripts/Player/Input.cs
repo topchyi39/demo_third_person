@@ -10,7 +10,7 @@ namespace Player
 
 
         public InputAction MoveAxis => _inputActions.Keyboard.MoveAxis;
-        public InputAction MouseLook => _inputActions.Keyboard.MouseLook;
+        public InputAction Look => _inputActions.Keyboard.Look;
         public InputAction Zoom => _inputActions.Keyboard.Zoom;
         
         private void OnEnable()
