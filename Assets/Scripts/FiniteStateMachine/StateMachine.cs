@@ -13,7 +13,7 @@ namespace FiniteStateMachine
     
     public class StateMachine
     {
-        private State _currentState;
+        protected State _currentState;
         
         public void ChangeState(State state)
         {

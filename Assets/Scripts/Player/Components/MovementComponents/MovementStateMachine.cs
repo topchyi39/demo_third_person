@@ -1,6 +1,9 @@
 ﻿using FiniteStateMachine;
 using Player.Components.MovementComponents.States;
 using Player.Components.MovementComponents.States.GroundStates;
+using Player.Components.MovementComponents.States.GroundStates.MovingStates;
+using Player.Components.MovementComponents.States.GroundStates.StartingStates;
+using Player.Components.MovementComponents.States.GroundStates.StoppingStates;
 
 namespace Player.Components.MovementComponents
 {
@@ -11,7 +14,10 @@ namespace Player.Components.MovementComponents
         private BaseMoveState _defaultState;
         
         public IdleState IdleState { get; private set; }
+        
+        public WalkStartingState WalkStartingState { get; private set; }
         public WalkState WalkState { get; private set; }
+        public WalkStoppingState WalkStoppingState { get; private set; }
         
         public MovementStateMachine(MovementComponent component)
         {
@@ -24,7 +30,25 @@ namespace Player.Components.MovementComponents
         {
             _defaultState = new GroundState(_component);
             IdleState = new IdleState(_component);
+            
+            WalkStartingState = new WalkStartingState(_component);
             WalkState = new WalkState(_component);
+            WalkStoppingState = new WalkStoppingState(_component);
+        }
+
+        public void OnAnimationEnterEvent()
+        {
+            ((BaseMoveState)_currentState).OnAnimationEnterEvent();
+        }
+
+        public void OnAnimationExitEvent()
+        {
+            ((BaseMoveState)_currentState).OnAnimationExitEvent();
+        }
+
+        public void OnAnimationTransitionEvent()
+        {
+            ((BaseMoveState)_currentState).OnAnimationTransitionEvent();
         }
     }
 }

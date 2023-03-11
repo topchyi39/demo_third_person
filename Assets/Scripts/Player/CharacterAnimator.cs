@@ -28,5 +28,10 @@ namespace Player
             dampTime ??= dampedTime;
             _animator.SetFloat(key, value, dampTime.Value, Time.deltaTime);
         }
+
+        public bool IsInTransition(int layerIndex)
+        {
+            return _animator.IsInTransition(layerIndex);
+        }
     }
 }

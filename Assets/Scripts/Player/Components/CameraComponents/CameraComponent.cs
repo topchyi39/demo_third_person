@@ -75,13 +75,6 @@ namespace Player.Components.CameraComponents
 
         private void ProcessMoving()
         {
-            if (mouseLook == Vector2.zero)
-            {
-                Animator.SetFloatSmooth(directionKey, 0);
-                return;
-            }
-            
-            
             var delta = mouseLook * moveSensitivity * Time.deltaTime;
             followTarget.rotation *= Quaternion.AngleAxis(delta.x, Vector3.up);
             followTarget.rotation *= Quaternion.AngleAxis(delta.y, Vector3.right);

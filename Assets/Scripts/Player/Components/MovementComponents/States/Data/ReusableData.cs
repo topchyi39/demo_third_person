@@ -13,14 +13,13 @@ namespace Player.Components.MovementComponents.States.Data
         //Rotate Data
         private Vector3 _targetRotation;
         private Vector3 _dampedTargetRotation;
-        private Vector3 _timeToReachTargetRotation;
+        private Vector3 _timeToReachRotation;
         
         public ref Vector3 TargetRotation => ref _targetRotation;
         public ref Vector3 DampedTargetRotation => ref _dampedTargetRotation;
-        public ref Vector3 TimeToReachTargetRotation => ref _timeToReachTargetRotation;
-        
-        public float SmoothTime => _timeToReachTargetRotation.y - DampedTargetRotationPassedTime;
+        public ref Vector3 TimeToReachRotation => ref _timeToReachRotation;
         
         public float DampedTargetRotationPassedTime { get; set; }
+        public float MovementDecelerationForce { get; set; }
     }
 }

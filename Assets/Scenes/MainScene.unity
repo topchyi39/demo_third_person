@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2159.8809, g: 2263.3887, b: 3285.3398, a: 1}
+  m_IndirectSpecularColor: {r: 2158.832, g: 2262.4883, b: 3284.7383, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -802,7 +802,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh334788
+  m_Name: pb_Mesh31530
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -960,18 +960,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!134 &1006547661
-PhysicMaterial:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  dynamicFriction: 0.6
-  staticFriction: 0.6
-  bounciness: 0
-  frictionCombine: 0
-  bounceCombine: 0
 --- !u!1 &1264690225
 GameObject:
   m_ObjectHideFlags: 3
@@ -2094,10 +2082,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1244359745, guid: c2134670f54fc6549b9ba3c20f57b11d, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 1006547661}
     - target: {fileID: 165537681443808883, guid: c2134670f54fc6549b9ba3c20f57b11d,
         type: 3}
       propertyPath: virtualCamera
@@ -2173,16 +2157,6 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1853962426}
-    - target: {fileID: 6098204765932204034, guid: c2134670f54fc6549b9ba3c20f57b11d,
-        type: 3}
-      propertyPath: m_WarningMessage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842113578545425961, guid: c2134670f54fc6549b9ba3c20f57b11d,
-        type: 3}
-      propertyPath: dampedTime
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 8936838089646252777, guid: c2134670f54fc6549b9ba3c20f57b11d,
         type: 3}
       propertyPath: cameraTransform
