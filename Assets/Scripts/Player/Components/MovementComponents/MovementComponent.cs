@@ -37,10 +37,9 @@ namespace Player.Components.MovementComponents
             _rigidbody = GetComponent<Rigidbody>();
             _resizableCollider = GetComponent<ResizableCapsuleCollider>();
             _reusableData = new ReusableData();
+            Debug.LogError(1);
             _stateMachine = new MovementStateMachine(this);
         }
-        
-        
 
         public override void ExecuteUpdate()
         {
@@ -52,6 +51,21 @@ namespace Player.Components.MovementComponents
         public override void ExecuteFixedUpdate()
         {
             _stateMachine.FixedUpdate();
+        }
+        
+        public void OnAnimationEnterEvent()
+        {
+            _stateMachine.OnAnimationEnterEvent();
+        }
+        
+        public void OnAnimationExitEvent()
+        {
+            _stateMachine.OnAnimationExitEvent();
+        }
+        
+        public void OnAnimationTransitionEvent()
+        {
+            _stateMachine.OnAnimationTransitionEvent();
         }
     }
 }

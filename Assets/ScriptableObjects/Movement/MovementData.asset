@@ -15,4 +15,7 @@ MonoBehaviour:
   baseSpeed: 5
   walkData:
     speedModifier: 0.4
+    delayBeforeStart: 0
+    startSpeedModifier: 0.4
+    decelerationForce: 5
     timeToReachRotation: {x: 0, y: 0.3, z: 0}

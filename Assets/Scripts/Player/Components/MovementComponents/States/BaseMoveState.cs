@@ -13,13 +13,9 @@ namespace Player.Components.MovementComponents.States
         protected MovementComponent _component;
         protected MovementData _movementData;
         protected MovementAnimationData _animationData;
-        protected MovementStateData _currentMovementStateData;
         protected Transform _transform;
 
         protected ReusableData _reusableData;
-
-        protected Action _startAnimationAction;
-        protected Action _endAnimationAction;
         
         public BaseMoveState(MovementComponent component)
         {
@@ -55,7 +51,7 @@ namespace Player.Components.MovementComponents.States
         
         private void Move()
         {
-            if(_component.ReusableData.MoveAxis == Vector2.zero || _currentMovementStateData.SpeedModifier == 0f) return;
+            if(_component.ReusableData.MoveAxis == Vector2.zero || _reusableData.SpeedModifier == 0f) return;
             
             var direction = CalculateDirection();
 
@@ -72,8 +68,8 @@ namespace Player.Components.MovementComponents.States
         /// <returns></returns>
         protected Vector3 CalculateDirection()
         {
-            var zVelocity = _component.CameraTransform.forward * _component.ReusableData.MoveAxis.y;
-            var xVelocity = _component.CameraTransform.right * _component.ReusableData.MoveAxis.x;
+            var zVelocity = _component.CameraTransform.forward * _reusableData.MoveAxis.y;
+            var xVelocity = _component.CameraTransform.right * _reusableData.MoveAxis.x;
             
             var velocity = zVelocity + xVelocity;
             
@@ -96,7 +92,7 @@ namespace Player.Components.MovementComponents.States
                 directionAngle += 360f;
             }
             
-            if (Math.Abs(directionAngle - _component.ReusableData.TargetRotation.y) > 0.01f)
+            if (Math.Abs(directionAngle - _reusableData.TargetRotation.y) > 0.01f)
             {
                 UpdateTargetRotationData(directionAngle);
             }
@@ -111,8 +107,8 @@ namespace Player.Components.MovementComponents.States
         /// <param name="targetAngle"></param>
         private void UpdateTargetRotationData(float targetAngle)
         {
-            _component.ReusableData.TargetRotation.y = targetAngle;
-            _component.ReusableData.DampedTargetRotationPassedTime = 0f;
+            _reusableData.TargetRotation.y = targetAngle;
+            _reusableData.DampedTargetRotationPassedTime = 0f;
         }
         
         /// <summary>
@@ -121,15 +117,15 @@ namespace Player.Components.MovementComponents.States
         private void RotateTowards()
         {
             var currentAngle = _component.Rigidbody.rotation.eulerAngles.y;
-            var targetAngle = _component.ReusableData.TargetRotation.y;
+            var targetAngle = _reusableData.TargetRotation.y;
 
             var smoothAngle = Mathf.SmoothDampAngle(
                 currentAngle,
                 targetAngle,
-                ref _component.ReusableData.DampedTargetRotation.y,
-                _currentMovementStateData.TimeToReachRotation.y - _component.ReusableData.DampedTargetRotationPassedTime);
+                ref _reusableData.DampedTargetRotation.y,
+                _reusableData.TimeToReachRotation.y - _reusableData.DampedTargetRotationPassedTime);
 
-            _component.ReusableData.DampedTargetRotationPassedTime += Time.deltaTime;
+            _reusableData.DampedTargetRotationPassedTime += Time.deltaTime;
             var targetRotation = Quaternion.Euler(0, smoothAngle, 0);
             
             _component.Rigidbody.MoveRotation(targetRotation);
@@ -137,7 +133,7 @@ namespace Player.Components.MovementComponents.States
 
         protected float GetMovementSpeed()
         {
-            return _component.MovementData.BaseSpeed * _currentMovementStateData.SpeedModifier;
+            return _component.MovementData.BaseSpeed * _reusableData.SpeedModifier;
         }
      
         protected Vector3 GetVerticalVelocity()
@@ -170,6 +166,21 @@ namespace Player.Components.MovementComponents.States
             return horizontalMovement.magnitude > minimumMagnitude;
         }
         
+        protected void DecelerateHorizontally()
+        {
+            var playerHorizontalVelocity = GetHorizontalVelocity();
+
+            _component.Rigidbody.AddForce(-playerHorizontalVelocity * _reusableData.MovementDecelerationForce, ForceMode.Acceleration);
+        }
+
+        protected void ResetHorizontalVelocity()
+        {
+            var velocity = _component.Rigidbody.velocity;
+            velocity.z = 0;
+            velocity.x = 0;
+            _component.Rigidbody.velocity = velocity;
+        }
+        
         #endregion
 
         #region Input Callbacks
@@ -195,15 +206,12 @@ namespace Player.Components.MovementComponents.States
 
         #region Animation Mathods
 
-        protected virtual void StartStateAnimation()
-        {
-            _startAnimationAction?.Invoke();
-        }
+        protected virtual void StartStateAnimation() { }
+        protected virtual void EndStateAnimation() { }
 
-        protected virtual void EndStateAnimation()
-        {
-            _endAnimationAction?.Invoke();
-        }
+        public virtual void OnAnimationEnterEvent() { }
+        public virtual void OnAnimationExitEvent() { }
+        public virtual void OnAnimationTransitionEvent() { }
 
         #endregion
     }
