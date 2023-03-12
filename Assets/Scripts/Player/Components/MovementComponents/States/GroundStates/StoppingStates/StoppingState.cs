@@ -4,8 +4,15 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
 {
     public class StoppingState : GroundState
     {
+        protected virtual int moveKey { get; }
+        
         public StoppingState(MovementComponent component) : base(component)
         {
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
         }
 
         public override void Update()
@@ -14,8 +21,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
 
             if (_reusableData.MoveAxis != Vector2.zero)
             {
-                _component.StateMachine.ChangeState(_component.StateMachine.WalkState);
-                // add other states
+                ChangeToMovingState();
             }
         }
 
@@ -23,11 +29,8 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
         {
             base.FixedUpdate();
             
-            if (!IsMovingHorizontally())
-            {
-                return;
-            }
-
+            if (!IsMovingHorizontally()) return;
+            
             DecelerateHorizontally();
         }
 
@@ -37,6 +40,9 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
         {
             base.StartStateAnimation();
             
+            // if(_reusableData.MoveAxis != Vector2.zero)  return;
+            
+            _component.Animator.SetBool(moveKey, true);
             _component.Animator.SetBool(_animationData.StoppingKey, true);
         }
 
@@ -44,13 +50,13 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
         {
             base.EndStateAnimation();
             
+            _component.Animator.SetBool(moveKey, false);
             _component.Animator.SetBool(_animationData.StoppingKey, false);
         }
 
         public override void OnAnimationTransitionEvent()
         {
             base.OnAnimationTransitionEvent();
-            
             _component.StateMachine.ChangeState(_component.StateMachine.IdleState);
         }
 

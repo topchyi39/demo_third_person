@@ -9,6 +9,7 @@ namespace Player.Components.MovementComponents.States.Data
         
         //Move Data
         public float SpeedModifier { get; set; }
+        public bool ShouldWalk { get; set; }
         
         //Rotate Data
         private Vector3 _targetRotation;

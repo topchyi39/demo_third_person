@@ -25,9 +25,6 @@ namespace Player.Components.CameraComponents
         [SerializeField] private float minDistance = 1f;
         [SerializeField] private float maxDistance = 3f;
         
-        [Space(10)]
-        [SerializeField] private string directionParameter = "Direction";
-
         private Cinemachine3rdPersonFollow _bodyTransposer;
                 
         private Vector2 mouseLook;
@@ -37,15 +34,11 @@ namespace Player.Components.CameraComponents
         private float xRotation;
         private float yRotation;
 
-        private int directionKey;
-
         public override void SetupAction()
         {
             Cursor.lockState = CursorLockMode.Locked;
             _currentTargetDistance = defaultDistance;
             _bodyTransposer = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-            
-            directionKey = UnityEngine.Animator.StringToHash(directionParameter);
         }
 
         public override void ExecuteUpdate()

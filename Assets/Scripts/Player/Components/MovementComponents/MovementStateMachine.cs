@@ -15,9 +15,15 @@ namespace Player.Components.MovementComponents
         
         public IdleState IdleState { get; private set; }
         
+        //Walk States
         public WalkStartingState WalkStartingState { get; private set; }
         public WalkState WalkState { get; private set; }
         public WalkStoppingState WalkStoppingState { get; private set; }
+        
+        //Jog States
+        public JogStartingState JogStartingState { get; private set; }
+        public JogState JogState { get; private set; }
+        public JogStoppingState JogStoppingState { get; private set; }
         
         public MovementStateMachine(MovementComponent component)
         {
@@ -34,6 +40,10 @@ namespace Player.Components.MovementComponents
             WalkStartingState = new WalkStartingState(_component);
             WalkState = new WalkState(_component);
             WalkStoppingState = new WalkStoppingState(_component);
+
+            JogStartingState = new JogStartingState(_component);
+            JogState = new JogState(_component);
+            JogStoppingState = new JogStoppingState(_component);
         }
 
         public void OnAnimationEnterEvent()

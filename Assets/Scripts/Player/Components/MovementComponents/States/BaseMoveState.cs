@@ -114,7 +114,7 @@ namespace Player.Components.MovementComponents.States
         /// <summary>
         /// Smooth rotate to target rotation
         /// </summary>
-        private void RotateTowards()
+        protected void RotateTowards()
         {
             var currentAngle = _component.Rigidbody.rotation.eulerAngles.y;
             var targetAngle = _reusableData.TargetRotation.y;
@@ -182,13 +182,30 @@ namespace Player.Components.MovementComponents.States
         }
         
         #endregion
-
+        
+        protected void ChangeToMovingState()
+        {
+            BaseMoveState state;
+            
+            
+            if(_reusableData.ShouldWalk)
+                state = _component.StateMachine.WalkStartingState;
+            else
+            {
+                state = _component.StateMachine.JogStartingState;
+            }
+            
+            _component.StateMachine.ChangeState(state);
+        }
+        
         #region Input Callbacks
 
         protected virtual void AddInputCallback()
         {
             _component.Input.MoveAxis.performed += MovePerformed;
             _component.Input.MoveAxis.canceled += MoveCanceled;
+
+            _component.Input.WalkToggle.performed += WalkToggled;
         }
 
 
@@ -196,12 +213,19 @@ namespace Player.Components.MovementComponents.States
         {
             _component.Input.MoveAxis.performed -= MovePerformed;
             _component.Input.MoveAxis.canceled -= MoveCanceled;
+            
+            _component.Input.WalkToggle.performed -= WalkToggled;
         }
 
         protected virtual void MovePerformed(InputAction.CallbackContext context) { }
 
         protected virtual void MoveCanceled(InputAction.CallbackContext context) { }
-        
+
+        protected virtual void WalkToggled(InputAction.CallbackContext context)
+        {
+            _reusableData.ShouldWalk = !_reusableData.ShouldWalk;
+        }
+
         #endregion
 
         #region Animation Mathods

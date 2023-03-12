@@ -43,19 +43,23 @@ namespace Player.Components.MovementComponents.Data
         
         [SerializeField] private string startingParameter = "StartMoving";
         [SerializeField] private string stoppingParameter = "StopMoving";
+        
         [SerializeField] private string walkParameter = "Walk";
+        [SerializeField] private string jogParameter = "Walk";
         
         
-
         private int? _verticalAxisKey;
         private int? _horizontalAxisKey;
         private int? _turnKey;
+        
         private int? _groundedKey;
         private int? _idleKey;
         private int? _movingKey;
         private int? _startingKey;
         private int? _stoppingKey;
+        
         private int? _walkKey;
+        private int? _jogKey;
 
         public int VerticalKey => _verticalAxisKey ??= Animator.StringToHash(verticalAxisParameter);
         public int HorizontalKey => _horizontalAxisKey ??= Animator.StringToHash(horizontalAxisParameter);
@@ -66,6 +70,7 @@ namespace Player.Components.MovementComponents.Data
         public int StartingKey => _startingKey ??= Animator.StringToHash(startingParameter);
         public int StoppingKey => _stoppingKey ??= Animator.StringToHash(stoppingParameter);
         public int WalkKey => _walkKey ??= Animator.StringToHash(walkParameter);
+        public int JogKey => _jogKey ??= Animator.StringToHash(jogParameter);
         
     }
 }

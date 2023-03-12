@@ -14,7 +14,16 @@ namespace Player.Components.MovementComponents.States.GroundStates.MovingStates
             _reusableData.SpeedModifier = _movementData.WalkData.SpeedModifier;
             _reusableData.TimeToReachRotation = _movementData.WalkData.TimeToReachRotation;
         }
-        
+
+        public override void Update()
+        {
+            base.Update();
+            
+            if (!_reusableData.ShouldWalk)
+                _component.StateMachine.ChangeState(_component.StateMachine.JogState);
+
+        }
+
         #region Input Callbacks
         
         protected override void MoveCanceled(InputAction.CallbackContext context)
@@ -22,6 +31,14 @@ namespace Player.Components.MovementComponents.States.GroundStates.MovingStates
             _component.StateMachine.ChangeState(_component.StateMachine.WalkStoppingState);
             
             base.MoveCanceled(context);
+        }
+        
+        protected override void WalkToggled(InputAction.CallbackContext context)
+        {
+            base.WalkToggled(context);
+            
+            if(!_reusableData.ShouldWalk)
+                _component.StateMachine.ChangeState(_component.StateMachine.JogState);
         }
 
         #endregion

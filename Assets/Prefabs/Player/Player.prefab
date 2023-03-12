@@ -158,10 +158,26 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1433def4-9484-4f94-bf35-fb606e8be449
+    m_ActionName: Character/Move Axis[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a9b8c4f2-93f2-44bd-9678-8d2ccb204d3a
+    m_ActionName: Character/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3f18e378-5b26-461a-a01b-41b0cbbbbd13
+    m_ActionName: Character/Zoom [/Mouse/scroll/y]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7434390-31c5-4d66-920b-dfeed9a980f4
+    m_ActionName: Character/Walk Toggle[/Keyboard/leftCtrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Keyboard
+  m_DefaultActionMap: Character
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &6043181337002525795
@@ -223,10 +239,9 @@ MonoBehaviour:
   maxXAngle: 340
   zoomSensitivity: 2
   smoothing: 5
-  defaultDistance: 2
+  defaultDistance: 4
   minDistance: 1
-  maxDistance: 3
-  directionParameter: Direction
+  maxDistance: 5
 --- !u!114 &2788586682284617637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +283,7 @@ MonoBehaviour:
     startingParameter: StartMoving
     stoppingParameter: StopMoving
     walkParameter: Walk
+    jogParameter: Jog
   followTarget: {fileID: 2110323065}
   cameraTransform: {fileID: 0}
 --- !u!54 &7349867136018694236

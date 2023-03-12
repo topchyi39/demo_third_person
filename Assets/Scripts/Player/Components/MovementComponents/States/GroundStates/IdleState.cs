@@ -30,7 +30,7 @@ namespace Player.Components.MovementComponents.States.GroundStates
 
         protected override void MovePerformed(InputAction.CallbackContext context)
         {
-            var axis = context.ReadValue<Vector2>();
+            var axis = _reusableData.MoveAxis;
             
             _component.Animator.SetFloat(_animationData.VerticalKey, axis.y);
             _component.Animator.SetFloat(_animationData.HorizontalKey, axis.x);
@@ -58,11 +58,7 @@ namespace Player.Components.MovementComponents.States.GroundStates
         }
 
         #endregion
-        
-        private void ChangeToMovingState()
-        {
-            _component.StateMachine.ChangeState(_component.StateMachine.WalkStartingState);
-        }
+
         
         
     }
