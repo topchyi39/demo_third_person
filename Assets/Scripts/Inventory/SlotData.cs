@@ -14,12 +14,11 @@ namespace Inventory
         
         public SlotData(IInventoryItem inventoryItem)
         {
-            _inventoryItem = inventoryItem;
-            var information = _inventoryItem.GetInformation();
-
-            id = information.ID;
-            name = information.Name;
-            count = 1;
+            // _inventoryItem = inventoryItem;
+            //
+            // id = information.ID;
+            // name = information.Name;
+            // count = 1;
         }
 
         public void IncreaseCount()
