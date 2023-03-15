@@ -1,9 +1,14 @@
 ﻿using FiniteStateMachine;
 using Player.Components.MovementComponents.States;
+using Player.Components.MovementComponents.States.AirborneStates;
 using Player.Components.MovementComponents.States.GroundStates;
+using Player.Components.MovementComponents.States.GroundStates.CrouchingStates;
+using Player.Components.MovementComponents.States.GroundStates.LandingStates;
 using Player.Components.MovementComponents.States.GroundStates.MovingStates;
+using Player.Components.MovementComponents.States.GroundStates.RollingStates;
 using Player.Components.MovementComponents.States.GroundStates.StartingStates;
 using Player.Components.MovementComponents.States.GroundStates.StoppingStates;
+using UnityEngine;
 
 namespace Player.Components.MovementComponents
 {
@@ -14,6 +19,8 @@ namespace Player.Components.MovementComponents
         private BaseMoveState _defaultState;
         
         public IdleState IdleState { get; private set; }
+
+        #region Garounded States
         
         //Walk States
         public WalkStartingState WalkStartingState { get; private set; }
@@ -24,6 +31,31 @@ namespace Player.Components.MovementComponents
         public JogStartingState JogStartingState { get; private set; }
         public JogState JogState { get; private set; }
         public JogStoppingState JogStoppingState { get; private set; }
+        
+        //Dash States
+        public DashStartingState DashStartingState { get; private set; }
+        public DashState DashState { get; private set; }
+        public DashStoppingState DashStoppingState { get; private set; }
+        
+        public RollingState RollingState { get; private set; }
+        
+        public CrouchIdleState CrouchIdleState { get; private set; }
+        public CrouchState CrouchState { get; private set; }
+        public CrouchStoppingState CrouchStoppingState { get; private set; }
+        
+        //Landing States
+        public CrouchLandState CrouchLandState { get; private set; }
+        public LightLandState LightLandState { get; private set; }
+        public HardLandState HardLandState { get; private set; }
+        
+        #endregion
+
+        #region Airborne States
+
+        public FallState FallState { get; private set; }
+        public JumpState JumpState { get; private set; }
+        
+        #endregion
         
         public MovementStateMachine(MovementComponent component)
         {
@@ -44,21 +76,48 @@ namespace Player.Components.MovementComponents
             JogStartingState = new JogStartingState(_component);
             JogState = new JogState(_component);
             JogStoppingState = new JogStoppingState(_component);
-        }
 
+            DashStartingState = new DashStartingState(_component);
+            DashState = new DashState(_component);
+            DashStoppingState = new DashStoppingState(_component);
+
+            RollingState = new RollingState(_component);
+
+            CrouchIdleState = new CrouchIdleState(_component);
+            CrouchState = new CrouchState(_component);
+            CrouchStoppingState = new CrouchStoppingState(_component);
+
+            CrouchLandState = new CrouchLandState(_component);
+            LightLandState = new LightLandState(_component);
+            HardLandState = new HardLandState(_component);
+
+            FallState = new FallState(_component);
+            JumpState = new JumpState(_component);
+        }
+        
+        public void OnTriggerEnter(Collider other)
+        {
+            _currentState.OnTriggerEnter(other);
+        }
+        
+        public void OnTriggerExit(Collider other)
+        {
+            _currentState.OnTriggerExit(other);
+        }
+        
         public void OnAnimationEnterEvent()
         {
-            ((BaseMoveState)_currentState).OnAnimationEnterEvent();
+            _currentState.OnAnimationEnterEvent();
         }
 
         public void OnAnimationExitEvent()
         {
-            ((BaseMoveState)_currentState).OnAnimationExitEvent();
+            _currentState.OnAnimationExitEvent();
         }
 
         public void OnAnimationTransitionEvent()
         {
-            ((BaseMoveState)_currentState).OnAnimationTransitionEvent();
+            _currentState.OnAnimationTransitionEvent();
         }
     }
 }

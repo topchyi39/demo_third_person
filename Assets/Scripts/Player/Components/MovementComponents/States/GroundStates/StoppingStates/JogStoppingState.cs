@@ -10,8 +10,8 @@
         {
             base.Enter();
             
-            _reusableData.TimeToReachRotation = _movementData.JogData.TimeToReachRotation;
-            _reusableData.MovementDecelerationForce = _movementData.JogData.DecelerationForce;
+            _reusableData.TimeToReachRotation = _groundedData.JogData.TimeToReachRotation;
+            _reusableData.MovementDecelerationForce = _groundedData.JogData.DecelerationForce;
         }
     }
 }

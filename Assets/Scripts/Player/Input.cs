@@ -15,8 +15,12 @@ namespace Player
         public InputAction Look => _inputActions.Character.Look;
         public InputAction Zoom => _inputActions.Character.Zoom;
         public InputAction WalkToggle => _inputActions.Character.WalkToggle;
+        public InputAction Dash => _inputActions.Character.Dash;
+        public InputAction Jump => _inputActions.Character.Jump;
+        public InputAction Roll => _inputActions.Character.Roll;
+        public InputAction Crouch => _inputActions.Character.Crouch;
 
-        private bool _gamepadActivated;
+        public bool IsGamepadActivated { get; private set; }
         
         public event Action KeyboardActivated;
         public event Action GamepadActivated;
@@ -40,18 +44,18 @@ namespace Player
 
         private void KeyboardStarted(InputAction.CallbackContext context)
         {
-            if (!_gamepadActivated) return;
+            if (!IsGamepadActivated) return;
 
-            _gamepadActivated = false;
+            IsGamepadActivated = false;
             
             KeyboardActivated?.Invoke();
         }
 
         private void GamepadStarted(InputAction.CallbackContext context)
         {
-            if (_gamepadActivated) return;
+            if (IsGamepadActivated) return;
 
-            _gamepadActivated = true;
+            IsGamepadActivated = true;
             
             GamepadActivated?.Invoke();
 

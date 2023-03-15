@@ -28,7 +28,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            
+            Rotate();
             if (!IsMovingHorizontally()) return;
             
             DecelerateHorizontally();
@@ -57,7 +57,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
         public override void OnAnimationTransitionEvent()
         {
             base.OnAnimationTransitionEvent();
-            _component.StateMachine.ChangeState(_component.StateMachine.IdleState);
+            ChangeToIdleState();
         }
 
         #endregion

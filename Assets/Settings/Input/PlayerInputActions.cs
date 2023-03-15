@@ -80,6 +80,42 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""02236b35-d4f9-4aff-b02a-fa4d2ca3a792"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c321ee0-b110-4852-a945-b1519a47de03"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c5c3818-cea6-48e7-ae95-f301767e2820"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ee2af91-f79e-43fb-902d-e53ecdf74291"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,7 +221,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6238c873-c284-4202-a731-50aa2f469d78"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""path"": ""<Keyboard>/leftAlt"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -324,6 +360,61 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Keyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f10beab5-7b02-49d7-bbf7-08f350f2ebac"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""384802cc-e1e8-411a-b433-e31ceeaf6647"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""156ce943-c0c2-4253-9661-3577b51e2e5e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6404d622-6bed-4432-88ac-7ccc553ef977"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2594c9ff-4894-4fbb-9bb5-d8ae5ade5871"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -338,6 +429,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Character_Look = m_Character.FindAction("Look", throwIfNotFound: true);
         m_Character_Zoom = m_Character.FindAction("Zoom ", throwIfNotFound: true);
         m_Character_WalkToggle = m_Character.FindAction("Walk Toggle", throwIfNotFound: true);
+        m_Character_Dash = m_Character.FindAction("Dash", throwIfNotFound: true);
+        m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
+        m_Character_Roll = m_Character.FindAction("Roll", throwIfNotFound: true);
+        m_Character_Crouch = m_Character.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +500,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Look;
     private readonly InputAction m_Character_Zoom;
     private readonly InputAction m_Character_WalkToggle;
+    private readonly InputAction m_Character_Dash;
+    private readonly InputAction m_Character_Jump;
+    private readonly InputAction m_Character_Roll;
+    private readonly InputAction m_Character_Crouch;
     public struct CharacterActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -415,6 +514,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Character_Look;
         public InputAction @Zoom => m_Wrapper.m_Character_Zoom;
         public InputAction @WalkToggle => m_Wrapper.m_Character_WalkToggle;
+        public InputAction @Dash => m_Wrapper.m_Character_Dash;
+        public InputAction @Jump => m_Wrapper.m_Character_Jump;
+        public InputAction @Roll => m_Wrapper.m_Character_Roll;
+        public InputAction @Crouch => m_Wrapper.m_Character_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -442,6 +545,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @WalkToggle.started += instance.OnWalkToggle;
             @WalkToggle.performed += instance.OnWalkToggle;
             @WalkToggle.canceled += instance.OnWalkToggle;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Roll.started += instance.OnRoll;
+            @Roll.performed += instance.OnRoll;
+            @Roll.canceled += instance.OnRoll;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -464,6 +579,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @WalkToggle.started -= instance.OnWalkToggle;
             @WalkToggle.performed -= instance.OnWalkToggle;
             @WalkToggle.canceled -= instance.OnWalkToggle;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Roll.started -= instance.OnRoll;
+            @Roll.performed -= instance.OnRoll;
+            @Roll.canceled -= instance.OnRoll;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -489,5 +616,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnWalkToggle(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }

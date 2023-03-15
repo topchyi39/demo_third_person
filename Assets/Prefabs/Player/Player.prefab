@@ -41,7 +41,7 @@ BoxCollider:
   m_GameObject: {fileID: 1244359743}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8936838089646252777}
   - component: {fileID: 7349867136018694236}
   - component: {fileID: 6442618070780282943}
-  - component: {fileID: 2611663226417148705}
+  - component: {fileID: 5607792231681466589}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -234,7 +234,8 @@ MonoBehaviour:
   priority: 0
   followTarget: {fileID: 2110323065}
   virtualCamera: {fileID: 0}
-  moveSensitivity: 5
+  mouseSensitivity: 5
+  gamepadSensitivity: 50
   minXAngle: 40
   maxXAngle: 340
   zoomSensitivity: 2
@@ -284,6 +285,7 @@ MonoBehaviour:
     stoppingParameter: StopMoving
     walkParameter: Walk
     jogParameter: Jog
+    dashParameter: Dash
   followTarget: {fileID: 2110323065}
   cameraTransform: {fileID: 0}
 --- !u!54 &7349867136018694236
@@ -316,7 +318,7 @@ CapsuleCollider:
   m_Height: 1.3499999
   m_Direction: 1
   m_Center: {x: 0, y: 1.125, z: 0}
---- !u!114 &2611663226417148705
+--- !u!114 &5607792231681466589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,7 +327,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2684550547096404056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e68b288843b4fef840638267f8ee21c, type: 3}
+  m_Script: {fileID: 11500000, guid: 52a2d2b904b34a09acbc6ec200badef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultColliderData:
@@ -336,6 +338,8 @@ MonoBehaviour:
     stepHeightPercentage: 0.25
     floatRayDistance: 2
     stepReachForce: 25
+  colliderData:
+    groundCheckCollider: {fileID: 1244359745}
 --- !u!1001 &6098204765300193653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -777,6 +781,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1253420565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6368166002592760868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0430be2384c458bba5540ccd5a33c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 1
 --- !u!114 &1486222904
 MonoBehaviour:
   m_ObjectHideFlags: 0

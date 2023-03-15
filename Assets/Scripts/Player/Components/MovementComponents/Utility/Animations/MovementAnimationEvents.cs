@@ -6,10 +6,10 @@ namespace Player.Components.MovementComponents.Utility.Animations
     {
         public void OnMovementAnimationEnterEvent()
         {
-            if (IsInAnimationTransition())
-            {
-                return;
-            }
+            // if (IsInAnimationTransition())
+            // {
+            //     return;
+            // }
             
             _component.OnAnimationEnterEvent();
         }

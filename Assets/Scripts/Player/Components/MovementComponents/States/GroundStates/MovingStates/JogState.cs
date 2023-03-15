@@ -14,8 +14,9 @@ namespace Player.Components.MovementComponents.States.GroundStates.MovingStates
         {
             base.Enter();
 
-            _reusableData.SpeedModifier = _movementData.JogData.SpeedModifier;
-            _reusableData.TimeToReachRotation = _movementData.JogData.TimeToReachRotation;
+            _reusableData.SpeedModifier = _groundedData.JogData.SpeedModifier;
+            _reusableData.JumpForce = _airborneData.JumpData.MediumForce;
+            _reusableData.TimeToReachRotation = _groundedData.JogData.TimeToReachRotation;
         }
 
         public override void Update()
@@ -30,12 +31,12 @@ namespace Player.Components.MovementComponents.States.GroundStates.MovingStates
         
         protected override async void MoveCanceled(InputAction.CallbackContext context)
         {
+            base.MoveCanceled(context);
+            
             await Task.Delay(250);
             
             if(_reusableData.MoveAxis == Vector2.zero)
                 _component.StateMachine.ChangeState(_component.StateMachine.JogStoppingState);
-            
-            base.MoveCanceled(context);
         }
 
         protected override void WalkToggled(InputAction.CallbackContext context)

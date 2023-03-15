@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player.Components.MovementComponents.States.GroundStates
 {
@@ -21,28 +22,86 @@ namespace Player.Components.MovementComponents.States.GroundStates
             Float();
         }
 
-        private void Float()
+        #region Physic Methods
+        
+        protected override void OnGroundExit(Collider collider)
         {
-            var origin = _component.ResizableCollider.WorldCapsuleCentre;
-            var direction = Vector3.down;
-            var rayDistance = _component.ResizableCollider.SlopeData.FloatRayDistance;
-            if (Physics.Raycast(origin, direction, out var hit, rayDistance, _component.LayerData.GroundLayer,
-                    QueryTriggerInteraction.Ignore))
+            if (IsThereGroundUnderneath())
             {
-                var groundAngle = Vector3.Angle(hit.normal, -direction);
+                return;
+            }
 
-                var distanceToFloatPoint =
-                    _component.ResizableCollider.LocalCapsuleCentre.y * _component.transform.localScale.y -
-                    hit.distance;
-                
-                
-                if (distanceToFloatPoint == 0f) return;
-                
-                float amountToLift = distanceToFloatPoint * _component.ResizableCollider.SlopeData.StepReachForce - GetVerticalVelocity().y;
-                Vector3 liftForce = new Vector3(0f, amountToLift, 0f);
-                _component.Rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
+            var capsuleColliderCenterInWorldSpace = _component.ResizableCollider.CapsuleColliderData.Collider.bounds.center;
+
+            var downwardsRayFromCapsuleBottom = new Ray(capsuleColliderCenterInWorldSpace - _component.ResizableCollider.CapsuleColliderData.ColliderVerticalExtents, Vector3.down);
+
+            if (!Physics.Raycast(downwardsRayFromCapsuleBottom, out _, _groundedData.DistanceToFall, _component.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+            {
+                OnFall();
             }
         }
+
+        private bool IsThereGroundUnderneath()
+        {
+            var triggerColliderData = _component.ResizableCollider.ColliderData;
+
+            var groundColliderCenterInWorldSpace = triggerColliderData.GroundCheckCollider.bounds.center;
+
+            var overlappedGroundColliders = Physics.OverlapBox(groundColliderCenterInWorldSpace, 
+                triggerColliderData.Extends, 
+                triggerColliderData.GroundCheckCollider.transform.rotation, 
+                _component.LayerData.GroundLayer, QueryTriggerInteraction.Ignore);
+
+            return overlappedGroundColliders.Length > 0;
+        }
+
+        protected void OnFall()
+        {
+            _component.StateMachine.ChangeState(_component.StateMachine.FallState);
+        }
+
+        #endregion
+
+        #region Input Callbacks
+
+        protected override void AddInputCallback()
+        {
+            base.AddInputCallback();
+
+            _component.Input.Jump.performed += JumpPerformed;
+            _component.Input.Dash.performed += DashPerformed;
+            _component.Input.Dash.canceled += DashCanceled;
+            _component.Input.Roll.performed += RollPerformed;
+            _component.Input.Crouch.performed += CrouchPerformed;
+        }
+
+        protected override void RemoveInputCallback()
+        {
+            base.RemoveInputCallback();
+            
+            _component.Input.Jump.performed -= JumpPerformed;
+            _component.Input.Dash.performed -= DashPerformed;
+            _component.Input.Dash.canceled -= DashCanceled;
+            _component.Input.Roll.performed -= RollPerformed;
+            _component.Input.Crouch.performed -= CrouchPerformed;
+        }
+
+        protected virtual void CrouchPerformed(InputAction.CallbackContext context)
+        {
+            _reusableData.ShouldCrouch = !_reusableData.ShouldCrouch;
+        }
+
+        protected virtual void JumpPerformed(InputAction.CallbackContext context)
+        {
+            _component.StateMachine.ChangeState(_component.StateMachine.JumpState);
+        }
+        
+        protected virtual void RollPerformed(InputAction.CallbackContext context)
+        {
+            _component.StateMachine.ChangeState(_component.StateMachine.RollingState);
+        }
+
+        #endregion
 
         #region Animation Methods
 

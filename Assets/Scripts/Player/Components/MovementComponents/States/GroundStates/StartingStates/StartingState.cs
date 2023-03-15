@@ -39,6 +39,11 @@ namespace Player.Components.MovementComponents.States.GroundStates.StartingState
         {
             base.StartStateAnimation();
             
+            var axis = _component.Input.MoveAxis.ReadValue<Vector2>();
+            
+            _component.Animator.SetFloat(_animationData.VerticalKey, axis.y);
+            _component.Animator.SetFloat(_animationData.HorizontalKey, axis.x);
+            
             _component.Animator.SetBool(moveKey, true);
             _component.Animator.SetBool(_animationData.StartingKey, true);
         }

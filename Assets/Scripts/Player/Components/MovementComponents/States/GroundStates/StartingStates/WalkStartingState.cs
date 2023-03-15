@@ -6,8 +6,8 @@ namespace Player.Components.MovementComponents.States.GroundStates.StartingState
     public class WalkStartingState : StartingState
     {
         protected override int moveKey => _animationData.WalkKey;
-        protected override float speedModifier => _movementData.WalkData.SpeedModifier;
-        protected override AnimationCurve modifierCurve => _movementData.WalkData.ModifierCurve;
+        protected override float speedModifier => _groundedData.WalkData.SpeedModifier;
+        protected override AnimationCurve modifierCurve => _groundedData.WalkData.ModifierCurve;
         protected override MovingState nextState =>_component.StateMachine.WalkState;
 
         public WalkStartingState(MovementComponent component) : base(component)
@@ -18,7 +18,8 @@ namespace Player.Components.MovementComponents.States.GroundStates.StartingState
         public override void Enter()
         {
             base.Enter();
-            _reusableData.TimeToReachRotation = _movementData.WalkData.TimeToReachRotation;
+            
+            _reusableData.TimeToReachRotation = _groundedData.WalkData.TimeToReachRotation;
         }
     }
 }

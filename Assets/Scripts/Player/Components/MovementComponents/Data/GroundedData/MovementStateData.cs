@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Player.Components.MovementComponents.States.Data
+namespace Player.Components.MovementComponents.Data
 {
     [Serializable]
     public class MovementStateData

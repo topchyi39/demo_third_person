@@ -6,8 +6,8 @@ namespace Player.Components.MovementComponents.States.GroundStates.StartingState
     public class JogStartingState : StartingState
     {
         protected override int moveKey => _animationData.JogKey;
-        protected override float speedModifier => _movementData.JogData.SpeedModifier;
-        protected override AnimationCurve modifierCurve => _movementData.JogData.ModifierCurve;
+        protected override float speedModifier => _groundedData.JogData.SpeedModifier;
+        protected override AnimationCurve modifierCurve => _groundedData.JogData.ModifierCurve;
         protected override MovingState nextState =>_component.StateMachine.JogState;
         
         public JogStartingState(MovementComponent component) : base(component)
@@ -18,7 +18,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.StartingState
         {
             base.Enter();
 
-            _reusableData.TimeToReachRotation = _movementData.JogData.TimeToReachRotation;
+            _reusableData.TimeToReachRotation = _groundedData.JogData.TimeToReachRotation;
         }
     }
 }

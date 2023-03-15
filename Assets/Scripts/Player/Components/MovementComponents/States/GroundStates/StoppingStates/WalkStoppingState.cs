@@ -12,8 +12,8 @@ namespace Player.Components.MovementComponents.States.GroundStates.StoppingState
         {
             base.Enter();
 
-            _reusableData.TimeToReachRotation = _movementData.WalkData.TimeToReachRotation;
-            _reusableData.MovementDecelerationForce = _movementData.WalkData.DecelerationForce;
+            _reusableData.TimeToReachRotation = _groundedData.WalkData.TimeToReachRotation;
+            _reusableData.MovementDecelerationForce = _groundedData.WalkData.DecelerationForce;
         }
     }
 }

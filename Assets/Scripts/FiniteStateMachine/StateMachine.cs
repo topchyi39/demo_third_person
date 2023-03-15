@@ -9,6 +9,13 @@ namespace FiniteStateMachine
         public abstract void Update();
         public abstract void FixedUpdate();
         public abstract void Exit();
+
+        public abstract void OnTriggerEnter(Collider other);
+        public abstract void OnTriggerExit(Collider other);
+        
+        public abstract void OnAnimationEnterEvent();
+        public abstract void OnAnimationExitEvent();
+        public abstract void OnAnimationTransitionEvent();
     }
     
     public class StateMachine
