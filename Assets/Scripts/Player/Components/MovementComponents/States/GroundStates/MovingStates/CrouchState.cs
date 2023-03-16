@@ -54,7 +54,9 @@ namespace Player.Components.MovementComponents.States.GroundStates.CrouchingStat
             if(_reusableData.MoveAxis == Vector2.zero)
                 _component.StateMachine.ChangeState(_component.StateMachine.CrouchStoppingState);
         }
-        
+
+        protected override void WalkToggled(InputAction.CallbackContext context) { }
+
         protected override void CrouchPerformed(InputAction.CallbackContext context)
         {
             _reusableData.ShouldCrouch = false;
