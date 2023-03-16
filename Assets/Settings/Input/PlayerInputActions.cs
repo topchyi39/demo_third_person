@@ -21,14 +21,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public @PlayerInputActions()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""PlayerInputActions"",
+    ""itemName"": ""PlayerInputActions"",
     ""maps"": [
         {
-            ""name"": ""Keyboard"",
+            ""itemName"": ""Keyboard"",
             ""id"": ""594f4e7d-2a18-4cc0-aacf-170cda455981"",
             ""actions"": [
                 {
-                    ""name"": ""Move Axis"",
+                    ""itemName"": ""Move Axis"",
                     ""type"": ""Value"",
                     ""id"": ""1433def4-9484-4f94-bf35-fb606e8be449"",
                     ""expectedControlType"": ""Vector2"",
@@ -39,7 +39,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""WASD"",
+                    ""itemName"": ""WASD"",
                     ""id"": ""73a8e647-15cd-4056-b5eb-a57d48aa5d6c"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -50,7 +50,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
+                    ""itemName"": ""up"",
                     ""id"": ""6fe09f03-816d-45ac-9593-600300f87a76"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
@@ -61,7 +61,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
+                    ""itemName"": ""down"",
                     ""id"": ""fa86eed0-7d7c-4757-9b6a-4a9f620b33d2"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -72,7 +72,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
+                    ""itemName"": ""left"",
                     ""id"": ""4440a7d0-e667-4ad1-a86b-0ce876189ff5"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -83,7 +83,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
+                    ""itemName"": ""right"",
                     ""id"": ""eca6c1aa-31ee-4fa3-86b6-1cc7c69db13e"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",

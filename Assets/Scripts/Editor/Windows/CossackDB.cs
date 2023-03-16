@@ -5,6 +5,7 @@ using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
+using UnityEngine;
 
 namespace Editor.Windows
 {
@@ -17,12 +18,13 @@ namespace Editor.Windows
         private static void OpenWindow()
         {
             var window = GetWindow<CossackDB>();
-            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
+            window.position = GUIHelper.GetEditorWindowRect().AlignCenter(1000, 800);
         }
 
-        [OnInspectorInit("Init")] 
-        public ItemsDataContainer itemsDataContainer;
+        [SerializeField]
+        private ItemsDataContainer itemsDataContainer;
 
+        [OnInspectorInit]
         public void Init()
         {
             itemsDataContainer = ScriptableDatabaseHelper.Load<ItemsDataContainer>(Container + ItemsContainer);
@@ -35,7 +37,6 @@ namespace Editor.Windows
                 { "ItemsWindow", this,  EditorIcons.Folder },
             };
             
-            tree.SortMenuItemsByName();
             return tree;
         }
     }

@@ -13,6 +13,8 @@ namespace Containers
     {
         [TypeFilter("GetFilteredTypeList")] 
         [OnCollectionChanged("BeforeListChanges","AfterListChanges")]
+        [Searchable]
+        [ListDrawerSettings(ShowItemCount = true)]
         [SerializeField] protected List<T> elements;
 
         public List<T> Elements => elements;
@@ -31,6 +33,12 @@ namespace Containers
             elements.Remove(element);
         }
 
+        [OnInspectorInit]
+        protected abstract void Initialize();
+        
+        [OnInspectorDispose]
+        protected abstract void Disable();
+        
         public abstract void AfterListChanges(CollectionChangeInfo info);
         public abstract void BeforeListChanges(CollectionChangeInfo info);
         
@@ -43,5 +51,5 @@ namespace Containers
             
             return q;
         }
-    }   
+    }
 }

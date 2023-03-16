@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b92015a865412ba275f60dd748154d, type: 3}
-  m_Name: ItemsDataContainer
+  m_Script: {fileID: 11500000, guid: 2a2bd0efd6f34e2e8b2fdb64ff6aa4e5, type: 3}
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  elements:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 5bff163797228334a8d577132c4ef734, type: 2}

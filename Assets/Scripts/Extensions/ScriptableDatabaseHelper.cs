@@ -14,31 +14,27 @@ namespace Extensions
         /// <summary>
         /// Creates and returns a clone of any given scriptable object.
         /// </summary>
-        public static void Clone<T>(this T scriptableObject, string name, Action onDone, Action<string> onError) where T : ScriptableObject
+        public static T Clone<T>(this T scriptableObject, string name) where T : ScriptableObject
         {
             var path = GetPathByType(scriptableObject);
             var instance = Object.Instantiate(scriptableObject);
             var url = $"{DatabasePath}/{path}/{name}.asset";
             
-            var checkedAsset = AssetDatabase.LoadAssetAtPath<T>(url);
-
-            if (checkedAsset != null)
-            {
-                onError?.Invoke("Name already used");
-            }
-            
-            AssetDatabase.CreateAsset(instance, $"{DatabasePath}/{path}/{name}.asset");
+            AssetDatabase.CreateAsset(instance, url);
             AssetDatabase.SaveAssets();
             EditorUtility.FocusProjectWindow();
             Selection.activeObject = instance;
-            onDone?.Invoke();
+            
+            var targetType = instance.GetType();
+            var asset = (T)AssetDatabase.LoadAssetAtPath(url, targetType);
+            return asset;
         }
 
         /// <summary>
         /// Delete scriptable object.
         /// </summary>
-        /// <param name="objectToDelete"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <param itemName="objectToDelete"></param>
+        /// <typeparam itemName="T"></typeparam>
         public static void Delete<T>(this T objectToDelete, string name) where T : ScriptableObject
         {
             var asset = objectToDelete.FindInDataBase(name);
@@ -53,8 +49,8 @@ namespace Extensions
         /// <summary>
         /// Load scriptable object from path.
         /// </summary>
-        /// <param name="path"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <param itemName="path"></param>
+        /// <typeparam itemName="T"></typeparam>
         /// <returns></returns>
         public static T Load<T>(string path) where T : ScriptableObject
         {

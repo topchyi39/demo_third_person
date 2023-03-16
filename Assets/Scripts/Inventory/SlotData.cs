@@ -17,7 +17,7 @@ namespace Inventory
             // _inventoryItem = inventoryItem;
             //
             // id = information.ID;
-            // name = information.Name;
+            // itemName = information.Name;
             // count = 1;
         }
 

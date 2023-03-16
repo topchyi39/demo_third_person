@@ -5,7 +5,6 @@ using ItemsCore.Items.Data.Base;
 using ItemsCore.Items.Data.Equip.Types;
 using ItemsCore.Items.Data.Equip.WeaponsBuffs;
 using Sirenix.OdinInspector;
-using UnityEngine;
 
 namespace ItemsCore.Items.Data.Equip
 {
@@ -15,33 +14,46 @@ namespace ItemsCore.Items.Data.Equip
     {
         [BoxGroup("Stats", CenterLabel = true)] 
         [LabelWidth(100)] 
-        public float damage;
+        [ShowInInspector]
+        public float damage { get; private set; }
         
         [BoxGroup("Stats")] 
         [LabelWidth(100)] 
-        public float balanceDamage;
+        [ShowInInspector]
+        public float balanceDamage { get; private set; }
         
         [BoxGroup("Stats")] 
         [LabelWidth(100)] 
-        public float attackSpeed;
+        [ShowInInspector]
+        public float attackSpeed { get; private set; }
 
         [BoxGroup("Stats")] 
         [LabelWidth(100)]
-        public WeaponType type;
+        [ShowInInspector]
+        public WeaponType type { get; private set; }
 
         [BoxGroup("Stats")] 
         [LabelWidth(100)]
-        public WeaponHandedType hand;
+        [ShowInInspector]
+        public WeaponHandedType hand { get; private set; }
 
-        [BoxGroup("Stats")] 
-        [LabelWidth(100)] 
+        [BoxGroup("Stats")]
+        [LabelWidth(100)]
         [HideLabel, Title("CriticalDamage (%)")]
-        [Range(100, 150)]
-        public float criticalDamage = 100;
+        [PropertyRange(100, 150)]
+        [ShowInInspector]
+        public float criticalDamage { get; private set; } = 100;
 
-        [TypeFilter("GetFilteredTypeList")] 
-        public BaseWeaponBuff[] itemBuff = Array.Empty<BaseWeaponBuff>();
+        [TypeFilter("GetFilteredTypeList")]
+        [ShowInInspector]
+        public BaseWeaponBuff[] itemBuff { get; private set; }
 
+        [OnInspectorInit]
+        private void Init()
+        {
+            itemBuff ??= Array.Empty<BaseWeaponBuff>();
+        }
+        
         public IEnumerable<Type> GetFilteredTypeList()
         {
             var q = typeof(BaseWeaponBuff).Assembly.GetTypes()
