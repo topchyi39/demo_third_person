@@ -30,7 +30,7 @@ namespace Player.Components.MovementComponents.States.GroundStates
             {
                 return;
             }
-
+            
             var capsuleColliderCenterInWorldSpace = _component.ResizableCollider.CapsuleColliderData.Collider.bounds.center;
 
             var downwardsRayFromCapsuleBottom = new Ray(capsuleColliderCenterInWorldSpace - _component.ResizableCollider.CapsuleColliderData.ColliderVerticalExtents, Vector3.down);

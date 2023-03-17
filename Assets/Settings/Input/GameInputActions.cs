@@ -419,7 +419,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Global"",
+            ""name"": ""InGame"",
             ""id"": ""e8c5e050-13c3-4e90-b002-868d1a27ad59"",
             ""actions"": [
                 {
@@ -461,9 +461,9 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
         m_Character_Roll = m_Character.FindAction("Roll", throwIfNotFound: true);
         m_Character_Crouch = m_Character.FindAction("Crouch", throwIfNotFound: true);
-        // Global
-        m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
-        m_Global_Interact = m_Global.FindAction("Interact", throwIfNotFound: true);
+        // InGame
+        m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
+        m_InGame_Interact = m_InGame.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -640,51 +640,51 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
     }
     public CharacterActions @Character => new CharacterActions(this);
 
-    // Global
-    private readonly InputActionMap m_Global;
-    private List<IGlobalActions> m_GlobalActionsCallbackInterfaces = new List<IGlobalActions>();
-    private readonly InputAction m_Global_Interact;
-    public struct GlobalActions
+    // InGame
+    private readonly InputActionMap m_InGame;
+    private List<IInGameActions> m_InGameActionsCallbackInterfaces = new List<IInGameActions>();
+    private readonly InputAction m_InGame_Interact;
+    public struct InGameActions
     {
         private @GameInputActions m_Wrapper;
-        public GlobalActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Interact => m_Wrapper.m_Global_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_Global; }
+        public InGameActions(@GameInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_InGame_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GlobalActions set) { return set.Get(); }
-        public void AddCallbacks(IGlobalActions instance)
+        public static implicit operator InputActionMap(InGameActions set) { return set.Get(); }
+        public void AddCallbacks(IInGameActions instance)
         {
-            if (instance == null || m_Wrapper.m_GlobalActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_GlobalActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_InGameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InGameActionsCallbackInterfaces.Add(instance);
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
         }
 
-        private void UnregisterCallbacks(IGlobalActions instance)
+        private void UnregisterCallbacks(IInGameActions instance)
         {
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
         }
 
-        public void RemoveCallbacks(IGlobalActions instance)
+        public void RemoveCallbacks(IInGameActions instance)
         {
-            if (m_Wrapper.m_GlobalActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_InGameActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IGlobalActions instance)
+        public void SetCallbacks(IInGameActions instance)
         {
-            foreach (var item in m_Wrapper.m_GlobalActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_InGameActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_GlobalActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_InGameActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public GlobalActions @Global => new GlobalActions(this);
+    public InGameActions @InGame => new InGameActions(this);
     public interface ICharacterActions
     {
         void OnGamepad(InputAction.CallbackContext context);
@@ -698,7 +698,7 @@ public partial class @GameInputActions: IInputActionCollection2, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
     }
-    public interface IGlobalActions
+    public interface IInGameActions
     {
         void OnInteract(InputAction.CallbackContext context);
     }

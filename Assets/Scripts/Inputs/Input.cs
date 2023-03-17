@@ -2,12 +2,18 @@
 
 namespace Inputs
 {
-    public class Input : MonoBehaviour
+    public interface IInput
+    {
+        public GameInputActions.CharacterActions CharacterActions { get; }
+        public GameInputActions.InGameActions InGameActions { get; }
+    }
+    
+    public class Input : MonoBehaviour, IInput
     {
         private GameInputActions _inputActions;
 
         public GameInputActions.CharacterActions CharacterActions => _inputActions.Character;
-        public GameInputActions.GlobalActions GlobalActions => _inputActions.Global;
+        public GameInputActions.InGameActions InGameActions => _inputActions.InGame;
 
         private void OnEnable()
         {

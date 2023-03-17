@@ -1,43 +1,62 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Inputs
 {
-    
-    public class CharacterInput : MonoBehaviour
+    public interface ICharacterInput
     {
-        private GameInputActions _inputActions;
+        InputAction MoveAxis { get; }
+        InputAction Look { get; }
+        InputAction Zoom { get; }
+        InputAction WalkToggle { get; }
+        InputAction Dash { get; }
+        InputAction Jump { get; }
+        InputAction Roll { get; }
+        InputAction Crouch { get; }
 
-
-        public InputAction MoveAxis => _inputActions.Character.MoveAxis;
-        public InputAction Look => _inputActions.Character.Look;
-        public InputAction Zoom => _inputActions.Character.Zoom;
-        public InputAction WalkToggle => _inputActions.Character.WalkToggle;
-        public InputAction Dash => _inputActions.Character.Dash;
-        public InputAction Jump => _inputActions.Character.Jump;
-        public InputAction Roll => _inputActions.Character.Roll;
-        public InputAction Crouch => _inputActions.Character.Crouch;
+        bool IsGamepadActivated { get; }
+        
+        event Action KeyboardActivated;
+        event Action GamepadActivated;
+    }
+    
+    
+    public class CharacterInput : MonoBehaviour, ICharacterInput
+    {
+        private IInput _input;
+        
+        public InputAction MoveAxis => _input.CharacterActions.MoveAxis;
+        public InputAction Look => _input.CharacterActions.Look;
+        public InputAction Zoom => _input.CharacterActions.Zoom;
+        public InputAction WalkToggle => _input.CharacterActions.WalkToggle;
+        public InputAction Dash => _input.CharacterActions.Dash;
+        public InputAction Jump => _input.CharacterActions.Jump;
+        public InputAction Roll => _input.CharacterActions.Roll;
+        public InputAction Crouch => _input.CharacterActions.Crouch;
 
         public bool IsGamepadActivated { get; private set; }
         
         public event Action KeyboardActivated;
         public event Action GamepadActivated;
+
+        [Inject]
+        private void Construct(IInput input)
+        {
+            _input = input;
+        }
         
         private void OnEnable()
         {
-            _inputActions ??= new GameInputActions();
-            _inputActions.Enable();
-            
-            _inputActions.Character.Keyboard.started += KeyboardStarted;
-            _inputActions.Character.Gamepad.started += GamepadStarted;
+            _input.CharacterActions.Keyboard.started += KeyboardStarted;
+            _input.CharacterActions.Gamepad.started += GamepadStarted;
         }
 
         private void OnDisable()
         {
-            _inputActions.Disable();
-            _inputActions.Character.Keyboard.started -= KeyboardStarted;
-            _inputActions.Character.Gamepad.started -= GamepadStarted;
+            _input.CharacterActions.Keyboard.started -= KeyboardStarted;
+            _input.CharacterActions.Gamepad.started -= GamepadStarted;
             
         }
 
