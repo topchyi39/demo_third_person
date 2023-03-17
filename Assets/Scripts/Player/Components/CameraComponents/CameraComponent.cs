@@ -37,10 +37,10 @@ namespace Player.Components.CameraComponents
             _currentTargetDistance = zoomSettings.DefaultDistance;
             _bodyTransposer = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
             
-            _input.KeyboardActivated += KeyboardActivated;
-            _input.GamepadActivated += GamepadActivated;
+            characterInput.KeyboardActivated += KeyboardActivated;
+            characterInput.GamepadActivated += GamepadActivated;
             
-            if(_input.IsGamepadActivated)
+            if(characterInput.IsGamepadActivated)
                 GamepadActivated();
             else
                 KeyboardActivated();
@@ -48,8 +48,8 @@ namespace Player.Components.CameraComponents
 
         public override void ExecuteUpdate()
         {
-            _mouseLook = _input.Look.ReadValue<Vector2>();
-            _zoomDelta = -_input.Zoom.ReadValue<float>() * zoomSettings.ZoomSensitivity;
+            _mouseLook = characterInput.Look.ReadValue<Vector2>();
+            _zoomDelta = -characterInput.Zoom.ReadValue<float>() * zoomSettings.ZoomSensitivity;
         }
 
         public override void ExecuteFixedUpdate()
@@ -114,14 +114,14 @@ namespace Player.Components.CameraComponents
         private void GamepadActivated()
         {
             _sensitivity = moveSettings.GamepadSensitivity;
-            _input.MoveAxis.performed += GamepadMovePerformed;
-            _input.MoveAxis.canceled += GamepadMoveCanceled;
+            characterInput.MoveAxis.performed += GamepadMovePerformed;
+            characterInput.MoveAxis.canceled += GamepadMoveCanceled;
         }
 
         private void KeyboardActivated()
         {
             _sensitivity = moveSettings.MouseSensitivity;
-            _input.MoveAxis.performed -= GamepadMovePerformed;
+            characterInput.MoveAxis.performed -= GamepadMovePerformed;
         }
 
         private void GamepadMovePerformed(InputAction.CallbackContext context)

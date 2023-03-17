@@ -40,7 +40,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.RollingStates
         {
             base.Exit();
 
-            _reusableData.MoveAxis = _component.Input.MoveAxis.ReadValue<Vector2>();
+            _reusableData.MoveAxis = _component.CharacterInput.MoveAxis.ReadValue<Vector2>();
             _component.ResizableCollider.UpdateSetting(_groundedData.DefaultCapsuleSettings);
         }
 
@@ -103,7 +103,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.RollingStates
             
             Debug.LogError("OnAnimationTransitionEvent");
             
-            var axis = _component.Input.MoveAxis.ReadValue<Vector2>();
+            var axis = _component.CharacterInput.MoveAxis.ReadValue<Vector2>();
             
             if(axis != Vector2.zero)
                 ChangeToMovingState();

@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInputActions",
+    "name": "GameInputActions",
     "maps": [
         {
             "name": "Character",
@@ -391,6 +391,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InGame",
+            "id": "e8c5e050-13c3-4e90-b002-868d1a27ad59",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "1aed1b62-08f3-4bdb-8817-24c44e81bdf0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1bcdd9ae-3be6-49f6-85e0-42571d0be5a6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

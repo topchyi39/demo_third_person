@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Inputs;
 using Player.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Player
 {
-    [RequireComponent(typeof(Input))]
+    [RequireComponent(typeof(CharacterInput))]
     public class CharacterController : MonoBehaviour
     {
         [SerializeField] private CharacterAnimator characterAnimator;
-        [SerializeField] private Input input;
+        [FormerlySerializedAs("input")] [SerializeField] private CharacterInput characterInput;
         
         private IEnumerable<CharacterComponent> _components;
         private CharacterComponent[] _componentsArray;
 
         public CharacterAnimator CharacterAnimator => characterAnimator;
-        public Input Input => input;
+        public CharacterInput CharacterInput => characterInput;
 
         private void Awake()
         {

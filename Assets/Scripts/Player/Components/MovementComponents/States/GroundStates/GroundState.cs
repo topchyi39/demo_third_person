@@ -30,7 +30,7 @@ namespace Player.Components.MovementComponents.States.GroundStates
             {
                 return;
             }
-
+            
             var capsuleColliderCenterInWorldSpace = _component.ResizableCollider.CapsuleColliderData.Collider.bounds.center;
 
             var downwardsRayFromCapsuleBottom = new Ray(capsuleColliderCenterInWorldSpace - _component.ResizableCollider.CapsuleColliderData.ColliderVerticalExtents, Vector3.down);
@@ -68,22 +68,22 @@ namespace Player.Components.MovementComponents.States.GroundStates
         {
             base.AddInputCallback();
 
-            _component.Input.Jump.performed += JumpPerformed;
-            _component.Input.Dash.performed += DashPerformed;
-            _component.Input.Dash.canceled += DashCanceled;
-            _component.Input.Roll.performed += RollPerformed;
-            _component.Input.Crouch.performed += CrouchPerformed;
+            _component.CharacterInput.Jump.performed += JumpPerformed;
+            _component.CharacterInput.Dash.performed += DashPerformed;
+            _component.CharacterInput.Dash.canceled += DashCanceled;
+            _component.CharacterInput.Roll.performed += RollPerformed;
+            _component.CharacterInput.Crouch.performed += CrouchPerformed;
         }
 
         protected override void RemoveInputCallback()
         {
             base.RemoveInputCallback();
             
-            _component.Input.Jump.performed -= JumpPerformed;
-            _component.Input.Dash.performed -= DashPerformed;
-            _component.Input.Dash.canceled -= DashCanceled;
-            _component.Input.Roll.performed -= RollPerformed;
-            _component.Input.Crouch.performed -= CrouchPerformed;
+            _component.CharacterInput.Jump.performed -= JumpPerformed;
+            _component.CharacterInput.Dash.performed -= DashPerformed;
+            _component.CharacterInput.Dash.canceled -= DashCanceled;
+            _component.CharacterInput.Roll.performed -= RollPerformed;
+            _component.CharacterInput.Crouch.performed -= CrouchPerformed;
         }
 
         protected virtual void CrouchPerformed(InputAction.CallbackContext context)

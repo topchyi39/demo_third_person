@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Inputs;
+using UnityEngine;
 
 namespace Player.Components
 {
@@ -8,16 +9,16 @@ namespace Player.Components
 
         protected bool _blockOther;
         protected CharacterController _characterController;
-        protected Input _input;
+        protected CharacterInput characterInput;
         
         public int Priority => priority;
-        public Input Input => _input;
+        public CharacterInput CharacterInput => characterInput;
         public CharacterAnimator Animator => _characterController.CharacterAnimator;
         
         public void Setup(CharacterController characterController)
         {
             _characterController = characterController;
-            _input = _characterController.Input;
+            characterInput = _characterController.CharacterInput;
             SetupAction();
         }
 

@@ -97,6 +97,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bdee573a2343fb8797fb7a7fb0b68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &356761889847781964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3322738476408388157}
+  - component: {fileID: 4070159859971577306}
+  m_Layer: 7
+  m_Name: InteractionHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3322738476408388157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356761889847781964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1245920120543976220}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4070159859971577306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356761889847781964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab9aac53e440f7803f2d341f3af2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2684550547096404056
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +150,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1245920120543976220}
-  - component: {fileID: 6098204765834136952}
   - component: {fileID: 6043181337002525795}
   - component: {fileID: 7378426299921271162}
   - component: {fileID: 8842113578545425961}
@@ -138,56 +181,10 @@ Transform:
   - {fileID: 5993048182873038494}
   - {fileID: 2110323065}
   - {fileID: 1244359744}
+  - {fileID: 3322738476408388157}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6098204765834136952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2684550547096404056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7fb0569ef6e82cf45a355eca67b5d931,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1433def4-9484-4f94-bf35-fb606e8be449
-    m_ActionName: Character/Move Axis[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a9b8c4f2-93f2-44bd-9678-8d2ccb204d3a
-    m_ActionName: Character/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3f18e378-5b26-461a-a01b-41b0cbbbbd13
-    m_ActionName: Character/Zoom [/Mouse/scroll/y]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f7434390-31c5-4d66-920b-dfeed9a980f4
-    m_ActionName: Character/Walk Toggle[/Keyboard/leftCtrl]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Character
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &6043181337002525795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnimator: {fileID: 8842113578545425961}
-  input: {fileID: 6043181337002525795}
+  characterInput: {fileID: 6043181337002525795}
 --- !u!114 &8842113578545425961
 MonoBehaviour:
   m_ObjectHideFlags: 0
