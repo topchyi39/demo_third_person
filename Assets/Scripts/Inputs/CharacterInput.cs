@@ -1,14 +1,13 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Player
+namespace Inputs
 {
     
-    public class Input : MonoBehaviour
+    public class CharacterInput : MonoBehaviour
     {
-        private PlayerInputActions _inputActions;
+        private GameInputActions _inputActions;
 
 
         public InputAction MoveAxis => _inputActions.Character.MoveAxis;
@@ -27,7 +26,7 @@ namespace Player
         
         private void OnEnable()
         {
-            _inputActions ??= new PlayerInputActions();
+            _inputActions ??= new GameInputActions();
             _inputActions.Enable();
             
             _inputActions.Character.Keyboard.started += KeyboardStarted;

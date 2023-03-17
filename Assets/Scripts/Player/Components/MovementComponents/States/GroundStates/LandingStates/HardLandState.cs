@@ -12,7 +12,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.LandingStates
         {
             base.Enter();
             
-            _component.Input.MoveAxis.Disable();
+            _component.CharacterInput.MoveAxis.Disable();
             ResetVelocity();
         }
         
@@ -27,7 +27,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.LandingStates
         {
             base.Exit();
             
-            _component.Input.MoveAxis.Enable();
+            _component.CharacterInput.MoveAxis.Enable();
         }
 
         #region Animation Methods

@@ -67,6 +67,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   groundedData:
     distanceToFall: 0.7
+    defaultCapsuleSettings:
+      height: 0
+      center: 0
+    crouchCapsuleSettings:
+      height: 0
+      center: 0
     walkData:
       speedModifier: 0.3
       modifierCurve:

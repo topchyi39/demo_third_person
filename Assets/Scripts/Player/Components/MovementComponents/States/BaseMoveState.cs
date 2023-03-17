@@ -345,18 +345,18 @@ namespace Player.Components.MovementComponents.States
 
         protected virtual void AddInputCallback()
         {
-            _component.Input.MoveAxis.performed += MovePerformed;
-            _component.Input.MoveAxis.canceled += MoveCanceled;
+            _component.CharacterInput.MoveAxis.performed += MovePerformed;
+            _component.CharacterInput.MoveAxis.canceled += MoveCanceled;
 
-            _component.Input.WalkToggle.performed += WalkToggled;
+            _component.CharacterInput.WalkToggle.performed += WalkToggled;
         }
         
         protected virtual void RemoveInputCallback()
         {
-            _component.Input.MoveAxis.performed -= MovePerformed;
-            _component.Input.MoveAxis.canceled -= MoveCanceled;
+            _component.CharacterInput.MoveAxis.performed -= MovePerformed;
+            _component.CharacterInput.MoveAxis.canceled -= MoveCanceled;
             
-            _component.Input.WalkToggle.performed -= WalkToggled;
+            _component.CharacterInput.WalkToggle.performed -= WalkToggled;
         }
 
         protected virtual void MovePerformed(InputAction.CallbackContext context)

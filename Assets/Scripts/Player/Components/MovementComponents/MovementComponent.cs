@@ -45,18 +45,18 @@ namespace Player.Components.MovementComponents
             _reusableData = new ReusableData();
             _stateMachine = new MovementStateMachine(this);
 
-            _input.KeyboardActivated += KeyboardActivated;
-            _input.GamepadActivated += GamepadActivated;
+            characterInput.KeyboardActivated += KeyboardActivated;
+            characterInput.GamepadActivated += GamepadActivated;
             
-            if(_input.IsGamepadActivated)
+            if(characterInput.IsGamepadActivated)
                 GamepadActivated();
         }
 
         public override void ExecuteUpdate()
         {
-            if (_input.MoveAxis.enabled) 
+            if (characterInput.MoveAxis.enabled) 
             {
-                var moveValue = _input.MoveAxis.ReadValue<Vector2>();
+                var moveValue = characterInput.MoveAxis.ReadValue<Vector2>();
 
                 if (_useGamepad)
                 {
@@ -71,7 +71,7 @@ namespace Player.Components.MovementComponents
                     _reusableData.LastMoveAxis = moveValue;
             }
             
-            _reusableData.LookDelta = _input.Look.ReadValue<Vector2>();
+            _reusableData.LookDelta = characterInput.Look.ReadValue<Vector2>();
             
             _stateMachine.Update();
         }
@@ -110,8 +110,8 @@ namespace Player.Components.MovementComponents
         public void SetOnlyWalk()
         {
             _reusableData.ShouldWalk = true;
-            _input.Dash.Disable();
-            _input.WalkToggle.Disable();
+            characterInput.Dash.Disable();
+            characterInput.WalkToggle.Disable();
         }
 
         [ContextMenu("SetAllMovementStateEnabled")]
@@ -119,8 +119,8 @@ namespace Player.Components.MovementComponents
         {
             _reusableData.ShouldWalk = false;
             
-            _input.Dash.Enable();
-            _input.WalkToggle.Enable();
+            characterInput.Dash.Enable();
+            characterInput.WalkToggle.Enable();
         }
 
         private void GamepadActivated()
