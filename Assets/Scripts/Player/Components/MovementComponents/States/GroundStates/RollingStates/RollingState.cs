@@ -21,7 +21,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.RollingStates
             _statAxis = _reusableData.MoveAxis;
             _reusableData.SpeedModifier = _groundedData.RollData.SpeedModifier;
             _reusableData.MovementDecelerationForce = _groundedData.RollData.DecelerationForce;
-
+            _component.ResizableCollider.UpdateSetting(_groundedData.CrouchCapsuleSettings);
             if (_reusableData.MoveAxis.y != 0)
             {
                 
@@ -41,6 +41,7 @@ namespace Player.Components.MovementComponents.States.GroundStates.RollingStates
             base.Exit();
 
             _reusableData.MoveAxis = _component.Input.MoveAxis.ReadValue<Vector2>();
+            _component.ResizableCollider.UpdateSetting(_groundedData.DefaultCapsuleSettings);
         }
 
         public override void Update()

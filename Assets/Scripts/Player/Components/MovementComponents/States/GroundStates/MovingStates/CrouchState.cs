@@ -19,12 +19,14 @@ namespace Player.Components.MovementComponents.States.GroundStates.CrouchingStat
             
             _shouldWalk = _reusableData.ShouldWalk;
             _reusableData.ShouldWalk = true;
+            _component.ResizableCollider.UpdateSetting(_groundedData.CrouchCapsuleSettings);
         }
 
         public override void Exit()
         {
             base.Exit();
             _reusableData.ShouldWalk = _shouldWalk;
+            _component.ResizableCollider.UpdateSetting(_groundedData.DefaultCapsuleSettings);
         }
         
         protected override void ChangeToMovingState()

@@ -17,6 +17,13 @@ namespace Player.Components.MovementComponents.States.GroundStates.CrouchingStat
             base.Enter();
 
             _startTime = Time.time;
+            _component.ResizableCollider.UpdateSetting(_groundedData.CrouchCapsuleSettings);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _component.ResizableCollider.UpdateSetting(_groundedData.DefaultCapsuleSettings);
         }
 
         public override void Update()
