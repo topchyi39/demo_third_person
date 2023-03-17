@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player.Components.MovementComponents.States.GroundStates.MovingStates
@@ -11,17 +12,43 @@ namespace Player.Components.MovementComponents.States.GroundStates.MovingStates
         {
             base.Enter();
 
-            _reusableData.SpeedModifier = _movementData.WalkData.SpeedModifier;
-            _reusableData.TimeToReachRotation = _movementData.WalkData.TimeToReachRotation;
+            _reusableData.SpeedModifier = _groundedData.WalkData.SpeedModifier;
+            _reusableData.JumpForce = _airborneData.JumpData.WeakForce;
+            _reusableData.TimeToReachRotation = _groundedData.WalkData.TimeToReachRotation;
         }
-        
+
+        public override void Update()
+        {
+            base.Update();
+            
+            if (!_reusableData.ShouldWalk)
+                _component.StateMachine.ChangeState(_component.StateMachine.JogState);
+
+        }
+
         #region Input Callbacks
         
         protected override void MoveCanceled(InputAction.CallbackContext context)
         {
-            _component.StateMachine.ChangeState(_component.StateMachine.WalkStoppingState);
-            
             base.MoveCanceled(context);
+
+            ToStopping();
+        }
+        
+        protected override void WalkToggled(InputAction.CallbackContext context)
+        {
+            base.WalkToggled(context);
+            
+            if(!_reusableData.ShouldWalk)
+                _component.StateMachine.ChangeState(_component.StateMachine.JogState);
+        }
+
+        protected virtual async void ToStopping()
+        {
+            await Task.Delay(250);
+            
+            if(_reusableData.MoveAxis == Vector2.zero)
+                _component.StateMachine.ChangeState(_component.StateMachine.WalkStoppingState);
         }
 
         #endregion

@@ -66,5 +66,10 @@ namespace Player
                 characterComponent.ExecuteFixedUpdate();
             }
         }
+
+        public T GetCharacterComponent<T>() where T : CharacterComponent
+        {
+            return (T) _components.First(item => item is T);
+        }
     }
 }

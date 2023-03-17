@@ -1,8 +1,9 @@
-﻿using FiniteStateMachine;
+﻿using System;
+using FiniteStateMachine;
 using Player.Components.MovementComponents.Data;
-using Player.Components.MovementComponents.States.Data;
 using Player.Components.MovementComponents.Utility.Collider;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player.Components.MovementComponents
 {
@@ -18,9 +19,13 @@ namespace Player.Components.MovementComponents
         [SerializeField] private Transform cameraTransform;
         
         private Rigidbody _rigidbody;
-        private ResizableCapsuleCollider _resizableCollider;
+        private CharacterResizableCapsuleCollider _resizableCollider;
         private MovementStateMachine _stateMachine;
         private ReusableData _reusableData;
+
+        private bool _useGamepad;
+
+        private bool _lastShouldWalkKeyboard;
 
         public MovementData MovementData => movementData;
         public MovementAnimationData AnimationData => animationData;
@@ -28,29 +33,62 @@ namespace Player.Components.MovementComponents
         public Transform CameraTransform => cameraTransform;
         
         public Rigidbody Rigidbody => _rigidbody;
-        public ResizableCapsuleCollider ResizableCollider => _resizableCollider;
+        public CharacterResizableCapsuleCollider ResizableCollider => _resizableCollider;
         public MovementStateMachine StateMachine => _stateMachine;
         public ReusableData ReusableData => _reusableData;
 
         public override void SetupAction()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            _resizableCollider = GetComponent<ResizableCapsuleCollider>();
+            _resizableCollider = GetComponent<CharacterResizableCapsuleCollider>();
+            
             _reusableData = new ReusableData();
-            Debug.LogError(1);
             _stateMachine = new MovementStateMachine(this);
+
+            _input.KeyboardActivated += KeyboardActivated;
+            _input.GamepadActivated += GamepadActivated;
+            
+            if(_input.IsGamepadActivated)
+                GamepadActivated();
         }
 
         public override void ExecuteUpdate()
         {
-            _reusableData.MoveAxis = _input.MoveAxis.ReadValue<Vector2>();
+            if (_input.MoveAxis.enabled) 
+            {
+                var moveValue = _input.MoveAxis.ReadValue<Vector2>();
+
+                if (_useGamepad)
+                {
+                    _reusableData.ShouldWalk = moveValue.magnitude < movementData.MaxMagnitudeForWalk;
+
+                    moveValue.Normalize();
+                }
+
+                _reusableData.MoveAxis = moveValue;
+
+                if (moveValue.magnitude > 0.01f)
+                    _reusableData.LastMoveAxis = moveValue;
+            }
+            
             _reusableData.LookDelta = _input.Look.ReadValue<Vector2>();
+            
             _stateMachine.Update();
         }
         
         public override void ExecuteFixedUpdate()
         {
             _stateMachine.FixedUpdate();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            _stateMachine.OnTriggerEnter(other);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            _stateMachine.OnTriggerExit(other);
         }
         
         public void OnAnimationEnterEvent()
@@ -66,6 +104,35 @@ namespace Player.Components.MovementComponents
         public void OnAnimationTransitionEvent()
         {
             _stateMachine.OnAnimationTransitionEvent();
+        }
+
+        [ContextMenu("SetOnlyWalk")]
+        public void SetOnlyWalk()
+        {
+            _reusableData.ShouldWalk = true;
+            _input.Dash.Disable();
+            _input.WalkToggle.Disable();
+        }
+
+        [ContextMenu("SetAllMovementStateEnabled")]
+        public void SetAllMovementStateEnabled()
+        {
+            _reusableData.ShouldWalk = false;
+            
+            _input.Dash.Enable();
+            _input.WalkToggle.Enable();
+        }
+
+        private void GamepadActivated()
+        {
+            _lastShouldWalkKeyboard = _reusableData.ShouldWalk;
+            _useGamepad = true;
+        }
+
+        private void KeyboardActivated()
+        {
+            _useGamepad = false;
+            _reusableData.ShouldWalk = _lastShouldWalkKeyboard;
         }
     }
 }

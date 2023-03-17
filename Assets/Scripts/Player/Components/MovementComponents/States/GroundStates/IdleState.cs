@@ -12,16 +12,12 @@ namespace Player.Components.MovementComponents.States.GroundStates
             base.Enter();
 
             _reusableData.SpeedModifier = 0f;
+            _reusableData.JumpForce = _airborneData.JumpData.StationaryForce;
         }
         
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            
-            // if (!IsMovingHorizontally())
-            // {
-            //     return;
-            // }
 
             ResetHorizontalVelocity();
         }
@@ -37,6 +33,28 @@ namespace Player.Components.MovementComponents.States.GroundStates
             
             ChangeToMovingState();
             base.MovePerformed(context);
+        }
+
+        protected override void CrouchPerformed(InputAction.CallbackContext context)
+        {
+            base.CrouchPerformed(context);
+            
+            if (_reusableData.ShouldCrouch)
+                _component.StateMachine.ChangeState(_component.StateMachine.CrouchIdleState);
+        }
+
+        protected override void RollPerformed(InputAction.CallbackContext context) { }
+
+        protected override void DashPerformed(InputAction.CallbackContext context)
+        {
+            base.DashPerformed(context);
+            _reusableData.ShouldDash = true;
+        }
+
+        protected override void DashCanceled(InputAction.CallbackContext context)
+        {
+            base.DashCanceled(context);
+            _reusableData.ShouldDash = false;
         }
 
         #endregion
@@ -58,12 +76,5 @@ namespace Player.Components.MovementComponents.States.GroundStates
         }
 
         #endregion
-        
-        private void ChangeToMovingState()
-        {
-            _component.StateMachine.ChangeState(_component.StateMachine.WalkStartingState);
-        }
-        
-        
     }
 }

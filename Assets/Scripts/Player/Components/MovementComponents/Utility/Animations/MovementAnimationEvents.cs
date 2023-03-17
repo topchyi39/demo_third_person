@@ -1,13 +1,15 @@
-﻿namespace Player.Components.MovementComponents.Utility.Animations
+﻿using UnityEngine;
+
+namespace Player.Components.MovementComponents.Utility.Animations
 {
     public class MovementAnimationEvents : AnimationEvents<MovementComponent>
     {
         public void OnMovementAnimationEnterEvent()
         {
-            if (IsInAnimationTransition())
-            {
-                return;
-            }
+            // if (IsInAnimationTransition())
+            // {
+            //     return;
+            // }
             
             _component.OnAnimationEnterEvent();
         }
@@ -28,7 +30,7 @@
             {
                 return;
             }
-            
+
             _component.OnAnimationTransitionEvent();
         }
     }
