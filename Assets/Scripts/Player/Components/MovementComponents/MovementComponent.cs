@@ -90,18 +90,6 @@ namespace Player.Components.MovementComponents
         {
             _stateMachine.OnTriggerExit(other);
         }
-
-        private void GamepadActivated()
-        {
-            _lastShouldWalkKeyboard = _reusableData.ShouldWalk;
-            _useGamepad = true;
-        }
-
-        private void KeyboardActivated()
-        {
-            _useGamepad = false;
-            _reusableData.ShouldWalk = _lastShouldWalkKeyboard;
-        }
         
         public void OnAnimationEnterEvent()
         {
@@ -116,6 +104,35 @@ namespace Player.Components.MovementComponents
         public void OnAnimationTransitionEvent()
         {
             _stateMachine.OnAnimationTransitionEvent();
+        }
+
+        [ContextMenu("SetOnlyWalk")]
+        public void SetOnlyWalk()
+        {
+            _reusableData.ShouldWalk = true;
+            _input.Dash.Disable();
+            _input.WalkToggle.Disable();
+        }
+
+        [ContextMenu("SetAllMovementStateEnabled")]
+        public void SetAllMovementStateEnabled()
+        {
+            _reusableData.ShouldWalk = false;
+            
+            _input.Dash.Enable();
+            _input.WalkToggle.Enable();
+        }
+
+        private void GamepadActivated()
+        {
+            _lastShouldWalkKeyboard = _reusableData.ShouldWalk;
+            _useGamepad = true;
+        }
+
+        private void KeyboardActivated()
+        {
+            _useGamepad = false;
+            _reusableData.ShouldWalk = _lastShouldWalkKeyboard;
         }
     }
 }
