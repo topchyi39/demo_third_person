@@ -56,10 +56,18 @@ namespace Player.Components.MovementComponents.Utility.Collider
 
             SetCapsuleColliderHeight(DefaultColliderData.Height * (1f - SlopeData.StepHeightPercentage));
 
-            RecalculateCapsuleColliderCenter();
+            RecalculateCapsuleColliderCenter(DefaultColliderData.Height, DefaultColliderData.CenterY);
 
             RecalculateColliderRadius();
 
+            CapsuleColliderData.UpdateColliderData();
+        }
+
+        public void UpdateSetting(CapsuleSettings settings)
+        {
+            SetCapsuleColliderHeight(settings.Height * (1f - SlopeData.StepHeightPercentage));
+            RecalculateCapsuleColliderCenter(settings.Height, settings.Center);
+            RecalculateColliderRadius();
             CapsuleColliderData.UpdateColliderData();
         }
 
@@ -73,11 +81,11 @@ namespace Player.Components.MovementComponents.Utility.Collider
             CapsuleColliderData.Collider.height = height;
         }
 
-        public void RecalculateCapsuleColliderCenter()
+        public void RecalculateCapsuleColliderCenter(float height, float center)
         {
-            float colliderHeightDifference = DefaultColliderData.Height - CapsuleColliderData.Collider.height;
+            float colliderHeightDifference = height - CapsuleColliderData.Collider.height;
 
-            Vector3 newColliderCenter = new Vector3(0f, DefaultColliderData.CenterY + (colliderHeightDifference / 2f), 0f);
+            Vector3 newColliderCenter = new Vector3(0f, center + (colliderHeightDifference / 2f), 0f);
 
             CapsuleColliderData.Collider.center = newColliderCenter;
         }

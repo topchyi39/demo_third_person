@@ -1,4 +1,5 @@
 using System;
+using Player.Components.MovementComponents.Utility.Collider;
 using UnityEngine;
 
 namespace Player.Components.MovementComponents.Data
@@ -10,6 +11,7 @@ namespace Player.Components.MovementComponents.Data
         [SerializeField] private AnimationCurve modifierCurve;
         [SerializeField] private float decelerationForce;
         [SerializeField] private Vector3 timeToReachRotation;
+        
         
         public float SpeedModifier => speedModifier;
         public AnimationCurve ModifierCurve => modifierCurve;

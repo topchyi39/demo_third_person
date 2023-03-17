@@ -13,6 +13,7 @@ namespace Player.Components.MovementComponents.States.GroundStates
 
             _reusableData.SpeedModifier = 0f;
             _reusableData.JumpForce = _airborneData.JumpData.StationaryForce;
+            _component.ResizableCollider.UpdateSetting(_groundedData.DefaultCapsuleSettings);
         }
         
         public override void FixedUpdate()
