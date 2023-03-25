@@ -11,6 +11,7 @@ namespace Inputs
         
         public override void InstallBindings()
         {
+            input.Enable();
             Container.Bind<IInput>().FromInstance(input).AsSingle();
             Container.Bind<IInGameInput>().FromInstance(inGameInput).AsSingle();
         }

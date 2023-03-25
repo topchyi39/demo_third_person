@@ -12,11 +12,16 @@ namespace Inputs
     {
         private GameInputActions _inputActions;
 
+        private bool _enabled;
+        
         public GameInputActions.CharacterActions CharacterActions => _inputActions.Character;
         public GameInputActions.InGameActions InGameActions => _inputActions.InGame;
 
         private void OnEnable()
         {
+            if (_enabled) return;
+
+            enabled = true;
             _inputActions ??= new GameInputActions();
             _inputActions.Enable();
         }
@@ -24,6 +29,16 @@ namespace Inputs
         private void OnDisable()
         {
             _inputActions.Disable();
+            _enabled = false;
+        }
+
+        public void Enable()
+        {
+            if (_enabled) return;
+
+            enabled = true;
+            _inputActions ??= new GameInputActions();
+            _inputActions.Enable();
         }
     }
 }

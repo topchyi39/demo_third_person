@@ -30,6 +30,13 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-uk
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17a7ad18c2059244fae021c3a1224f23
+    m_Address: Inventory_uk
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-uk
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: b9e74d34ac6158447908b12c134904d7, type: 2}
   m_SchemaSet:
