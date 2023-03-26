@@ -33,7 +33,6 @@ namespace Player.Components.CameraComponents
         
         public override void SetupAction()
         {
-            Cursor.lockState = CursorLockMode.Locked;
             _currentTargetDistance = zoomSettings.DefaultDistance;
             _bodyTransposer = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
             
