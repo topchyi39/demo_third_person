@@ -20,6 +20,7 @@ namespace UI.UIControls
 
         public override void Enable()
         {
+            Cursor.lockState = CursorLockMode.None;
             _inGameInput.Escape.performed += EscapePerformed;
         }
 

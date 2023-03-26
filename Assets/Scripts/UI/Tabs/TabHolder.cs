@@ -36,6 +36,8 @@ namespace UI.Tabs
 
         private void TabOpened(Tab<T> tab)
         {
+            if(_currentTab == tab) return;
+            
             if (_currentTab)
                 _currentTab.Hide();
 

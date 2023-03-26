@@ -21,6 +21,7 @@ namespace UI.UIControls
 
         public override void Enable()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             _inGameInput.Escape.performed += EscapePerformed;
             _inGameInput.Inventory.performed += InventoryPerformed;
         }

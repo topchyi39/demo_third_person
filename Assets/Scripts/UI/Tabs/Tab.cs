@@ -12,6 +12,8 @@ namespace UI.Tabs
         [SerializeField] protected Button headerButton;
         [Space]
         [SerializeField] protected UnityEvent<Tab<T>> onShowed;
+
+        private bool _showed;
         
         public abstract T TabName { get; }
         
@@ -29,17 +31,21 @@ namespace UI.Tabs
 
         public virtual void Show()
         {
+            _showed = true;
             transition.Show();
         }
         
         public virtual void ShowByButton()
         {
+            if (_showed) return;
+            
             Show();
             onShowed?.Invoke(this);
         }
 
         public virtual void Hide()
         {
+            _showed = false;
             transition.Hide();
         }
         
