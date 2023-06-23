@@ -1,4 +1,4 @@
-# demo_third_person
+# Demo Third Person Controller
 
 ## Character Controller
 Character controller using a state machine for controlling and managing move, combat (in future) systems
