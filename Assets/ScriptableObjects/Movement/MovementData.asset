@@ -68,11 +68,11 @@ MonoBehaviour:
   groundedData:
     distanceToFall: 0.7
     defaultCapsuleSettings:
-      height: 0
-      center: 0
+      height: 1.125
+      center: 1.35
     crouchCapsuleSettings:
-      height: 0
-      center: 0
+      height: 1.125
+      center: 1.35
     walkData:
       speedModifier: 0.3
       modifierCurve:

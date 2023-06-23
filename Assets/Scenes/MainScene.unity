@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2158.8323, g: 2262.4885, b: 3284.7388, a: 1}
+  m_IndirectSpecularColor: {r: 2156.8586, g: 2260.8381, b: 3283.4224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1466,7 +1466,7 @@ PrefabInstance:
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
@@ -1476,17 +1476,17 @@ PrefabInstance:
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 785
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
@@ -1526,12 +1526,12 @@ PrefabInstance:
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 542.5
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
@@ -10266,6 +10266,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1949479282157414108, guid: f552739ccc15c964d8ba5a362361bc3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3378717370177606710, guid: f552739ccc15c964d8ba5a362361bc3d,
         type: 3}
       propertyPath: m_RootOrder
@@ -10730,7 +10735,7 @@ PrefabInstance:
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
@@ -10740,17 +10745,17 @@ PrefabInstance:
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 785
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
@@ -10790,12 +10795,12 @@ PrefabInstance:
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1377.5
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 1884169359671588087, guid: 48e791fc835e2ce4388a85e092bcad99,
         type: 3}
